@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.example.lms.R;
 import com.example.lms.view.activity.admin.grade.GradesActivity;
+import com.example.lms.view.activity.admin.instructor.InstructorActivity;
 
 public class AdminHomeActivity extends AppCompatActivity {
 
@@ -25,10 +26,10 @@ public class AdminHomeActivity extends AppCompatActivity {
                 intent = new Intent(this, GradesActivity.class);
                 startActivity(intent);
                 break;
-//            case R.id.card_instructors:
-//                intent = new Intent(this, InstructorsActivity.class);
-//                startActivity(intent);
-//                break;
+            case R.id.card_instructors:
+                intent = new Intent(this, InstructorActivity.class);
+                startActivity(intent);
+                break;
 //            case R.id.card_courses:
 //                intent = new Intent(this, CoursesActivity.class);
 //                startActivity(intent);

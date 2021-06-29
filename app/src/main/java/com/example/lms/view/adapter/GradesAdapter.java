@@ -24,12 +24,12 @@ public class GradesAdapter extends ListAdapter<Grade, GradesAdapter.GradesViewHo
     public static final DiffUtil.ItemCallback<Grade> DIFF_CALLBACK = new DiffUtil.ItemCallback<Grade>() {
         @Override
         public boolean areItemsTheSame(@NonNull @NotNull Grade oldItem, @NonNull @NotNull Grade newItem) {
-            return oldItem.getID() == newItem.getID();
+            return oldItem.getGradeID() == newItem.getGradeID();
         }
 
         @Override
         public boolean areContentsTheSame(@NonNull @NotNull Grade oldItem, @NonNull @NotNull Grade newItem) {
-            return oldItem.getTitle().equals(newItem.getTitle());
+            return oldItem.getGradeName().equals(newItem.getGradeName());
         }
     };
 
@@ -45,9 +45,8 @@ public class GradesAdapter extends ListAdapter<Grade, GradesAdapter.GradesViewHo
     @Override
     public void onBindViewHolder(@NonNull @NotNull GradesViewHolder holder, int position) {
         Grade currentGrade = getItem(position);
-        holder.textView.setText(currentGrade.getTitle());
+        holder.textView.setText(currentGrade.getGradeName());
     }
-
 
     static class GradesViewHolder extends RecyclerView.ViewHolder {
         private final TextView textView;

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.activity.admin.instructor.InstructorDetailsActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:hint="@string/instructor_name"
+                app:errorEnabled="true"
+                style="@style/textInputStyle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_instructor_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:hint="@string/instructor_address"
+                app:errorEnabled="true"
+                style="@style/textInputStyle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_instructor_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:hint="@string/instructor_phone"
+                app:errorEnabled="true"
+                style="@style/textInputStyle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_instructor_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:hint="@string/instructor_email"
+                app:errorEnabled="true"
+                style="@style/textInputStyle">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_instructor_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:hint="@string/instructor_password"
+                app:errorEnabled="true"
+                style="@style/textInputStyle">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_instructor_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
