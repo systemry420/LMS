@@ -56,7 +56,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
             txtName.setError("Please enter course name");
             return;
         }
-        else if (desc.equals("")) {
+        if (desc.equals("")) {
             txtDescription.setError("Please enter course description");
             return;
         }

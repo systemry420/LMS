@@ -1,4 +1,4 @@
-package com.example.lms.view.activity.admin.instructor;
+package com.example.lms.view.activity.admin.student;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,29 +7,32 @@ import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.lms.R;
-import com.example.lms.model.Instructor;
-import com.example.lms.viewmodel.InstructorViewModel;
+import com.example.lms.model.Student;
+import com.example.lms.viewmodel.StudentViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 
-public class InstructorDetailsActivity extends AppCompatActivity {
+public class StudentDetailsActivity extends AppCompatActivity {
     TextInputEditText txtName, txtAddress, txtEmail, txtPassword, txtPhone;
-    InstructorViewModel instructorViewModel;
+    Spinner spinnerGrade;
+    StudentViewModel studentViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_instructor_details);
+        setContentView(R.layout.activity_student_details);
 
-        txtName = findViewById(R.id.txt_instructor_name);
-        txtAddress = findViewById(R.id.txt_instructor_address);
-        txtEmail = findViewById(R.id.txt_instructor_email);
-        txtPassword = findViewById(R.id.txt_instructor_password);
-        txtPhone = findViewById(R.id.txt_instructor_phone);
+        txtName = findViewById(R.id.txt_student_name);
+        txtAddress = findViewById(R.id.txt_student_address);
+        txtEmail = findViewById(R.id.txt_student_email);
+        txtPassword = findViewById(R.id.txt_student_password);
+        txtPhone = findViewById(R.id.txt_student_phone);
 
-        instructorViewModel = new ViewModelProvider(this).get(InstructorViewModel.class);
+        studentViewModel = new ViewModelProvider(this).get(StudentViewModel.class);
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -50,33 +53,33 @@ public class InstructorDetailsActivity extends AppCompatActivity {
     private void saveInstructor() {
         String name = txtName.getText().toString();
         String address = txtAddress.getText().toString();
+        String phone = txtPhone.getText().toString();
         String email = txtEmail.getText().toString();
         String password = txtPassword.getText().toString();
-        String phone = txtPhone.getText().toString();
         if (name.equals("")) {
-            txtName.setError("Please enter instructor name");
+            txtName.setError("Please enter student name");
             return;
         }
         if (address.equals("")) {
-            txtAddress.setError("Please enter instructor address");
-            return;
-        }
-        if (email.equals("")) {
-            txtEmail.setError("Please enter instructor email");
-            return;
-        }
-        if (password.equals("")) {
-            txtPassword.setError("Please enter instructor password");
+            txtAddress.setError("Please enter student address");
             return;
         }
         if (phone.equals("")) {
-            txtPhone.setError("Please enter instructor phone");
+            txtPhone.setError("Please enter student phone");
+            return;
+        }
+        if (email.equals("")) {
+            txtEmail.setError("Please enter student email");
+            return;
+        }
+        if (password.equals("")) {
+            txtPassword.setError("Please enter student password");
             return;
         }
 
-        Instructor instructor = new Instructor(name, address, phone, email, password);
-        instructorViewModel.insertInstructor(instructor);
-        Toast.makeText(this, "Instructor added successfully!", Toast.LENGTH_LONG).show();
+        Student student = new Student(0, name, address, email, password, phone);
+        studentViewModel.insertStudent(student);
+        Toast.makeText(this, "Student added successfully!", Toast.LENGTH_LONG).show();
         finish();
     }
 }

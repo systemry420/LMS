@@ -8,9 +8,11 @@ import com.example.lms.database.AppDatabase;
 import com.example.lms.database.dao.CourseDao;
 import com.example.lms.database.dao.GradeDao;
 import com.example.lms.database.dao.InstructorDao;
+import com.example.lms.database.dao.StudentDao;
 import com.example.lms.model.Course;
 import com.example.lms.model.Grade;
 import com.example.lms.model.Instructor;
+import com.example.lms.model.Student;
 
 import java.util.List;
 
@@ -19,20 +21,24 @@ public class AdminRepo {
     private final GradeDao gradeDao;
     private final InstructorDao instructorDao;
     private final CourseDao courseDao;
+    private final StudentDao studentDao;
     private final LiveData<List<Grade>> allGrades;
     private final LiveData<List<Instructor>> allInstructors;
     private final LiveData<List<Course>> allCourses;
+    private final LiveData<List<Student>> allStudents;
 
     public AdminRepo(Application application) {
         AppDatabase db = AppDatabase.getInstance(application.getApplicationContext());
         gradeDao = db.gradeDao();
         instructorDao = db.instructorDao();
         courseDao = db.courseDao();
+        studentDao = db.studentDao();
 
 
         allGrades = gradeDao.getAllGrades();
         allInstructors = instructorDao.getAllInstructor();
         allCourses = courseDao.getAllCourses();
+        allStudents = studentDao.getAllStudents();
     }
 
     public LiveData<List<Grade>> getAllGrades() {
@@ -45,6 +51,16 @@ public class AdminRepo {
 
     public LiveData<List<Course>> getAllICourses() {
         return allCourses;
+    }
+
+    public LiveData<List<Student>> getAllStudents() {
+        return allStudents;
+    }
+
+    public void insertStudent(Student student) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            studentDao.insertStudent(student);
+        });
     }
 
     public void insertGrade(Grade grade) {

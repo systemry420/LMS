@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LMS">
-        <activity android:name=".view.activity.student.StudentsActivity"></activity>
+        <activity android:name=".view.activity.admin.student.StudentDetailsActivity"></activity>
+        <activity android:name=".view.activity.admin.student.StudentsActivity" />
         <activity android:name=".view.activity.admin.course.CourseDetailsActivity" />
         <activity android:name=".view.activity.admin.course.CoursesActivity" />
         <activity android:name=".view.activity.admin.instructor.InstructorDetailsActivity" />

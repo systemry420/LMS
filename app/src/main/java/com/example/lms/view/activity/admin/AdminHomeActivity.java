@@ -10,7 +10,7 @@ import com.example.lms.R;
 import com.example.lms.view.activity.admin.course.CoursesActivity;
 import com.example.lms.view.activity.admin.grade.GradesActivity;
 import com.example.lms.view.activity.admin.instructor.InstructorActivity;
-import com.example.lms.view.activity.student.StudentsActivity;
+import com.example.lms.view.activity.admin.student.StudentsActivity;
 
 public class AdminHomeActivity extends AppCompatActivity {
 
