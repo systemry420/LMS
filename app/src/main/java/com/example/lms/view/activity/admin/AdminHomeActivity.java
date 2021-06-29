@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.lms.R;
+import com.example.lms.view.activity.admin.course.CoursesActivity;
 import com.example.lms.view.activity.admin.grade.GradesActivity;
 import com.example.lms.view.activity.admin.instructor.InstructorActivity;
+import com.example.lms.view.activity.student.StudentsActivity;
 
 public class AdminHomeActivity extends AppCompatActivity {
 
@@ -30,14 +32,14 @@ public class AdminHomeActivity extends AppCompatActivity {
                 intent = new Intent(this, InstructorActivity.class);
                 startActivity(intent);
                 break;
-//            case R.id.card_courses:
-//                intent = new Intent(this, CoursesActivity.class);
-//                startActivity(intent);
-//                break;
-//            case R.id.card_students:
-//                intent = new Intent(this, StudentsActivity.class);
-//                startActivity(intent);
-//                break;
+            case R.id.card_courses:
+                intent = new Intent(this, CoursesActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.card_students:
+                intent = new Intent(this, StudentsActivity.class);
+                startActivity(intent);
+                break;
         }
 
     }}
