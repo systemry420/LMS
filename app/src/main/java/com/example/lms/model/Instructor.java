@@ -4,6 +4,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import org.jetbrains.annotations.NotNull;
+
 @Entity(tableName = "instructor")
 public class Instructor {
 
@@ -36,6 +38,7 @@ public class Instructor {
         this.password = password;
     }
 
+    @NotNull
     @Override
     public String toString() {
         return "Instructor{" +

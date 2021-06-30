@@ -1,13 +1,10 @@
 <resources>
     <string name="app_name">SeniorProject - LMS</string>
-    <string name="add_lecture">Add Lecture</string>
     <string name="add_exam">Add Exam</string>
     <string name="lectures">Lectures</string>
     <string name="exams">Exams</string>
     <string name="please_enter_lecture_title">Please enter lecture title</string>
     <string name="please_enter_lecture_link">Please enter lecture link</string>
-    <string name="lecture_link">Lecture link</string>
-    <string name="lecture_title">Lecture title</string>
     <string name="save">Save</string>
     <string name="department">Department</string>
     <string name="grades">Grades</string>
@@ -29,4 +26,9 @@
     <string name="student_password">Student Password</string>
     <string name="student_phone">Student Phone</string>
     <string name="student_email">Student Email</string>
+    <string name="add_lecture">Add Lecture</string>
+    <string name="correct_exam">Correct Exam</string>
+    <string name="students_profile">Students Profile</string>
+    <string name="lecture_title">Lecture title</string>
+    <string name="lecture_link">Lecture link</string>
 </resources>

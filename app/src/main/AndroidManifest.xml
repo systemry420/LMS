@@ -9,19 +9,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LMS">
-        <activity android:name=".view.activity.admin.student.StudentDetailsActivity"></activity>
-        <activity android:name=".view.activity.admin.student.StudentsActivity" />
-        <activity android:name=".view.activity.admin.course.CourseDetailsActivity" />
-        <activity android:name=".view.activity.admin.course.CoursesActivity" />
-        <activity android:name=".view.activity.admin.instructor.InstructorDetailsActivity" />
-        <activity android:name=".view.activity.admin.instructor.InstructorActivity" />
-        <activity android:name=".view.activity.admin.AdminHomeActivity">
+        <activity android:name=".view.activity.instructor.student.StudentProfileActivity"></activity>
+        <activity android:name=".view.activity.instructor.evaluation.CorrectExamDetailsActivity" />
+        <activity android:name=".view.activity.instructor.evaluation.CorrectExamActivity" />
+        <activity android:name=".view.activity.instructor.exam.ExamDetailsActivity" />
+        <activity android:name=".view.activity.instructor.exam.AddExamActivity" />
+        <activity android:name=".view.activity.instructor.lecture.LectureDetailsActivity" />
+        <activity android:name=".view.activity.instructor.lecture.AddLectureActivity" />
+        <activity android:name=".view.activity.instructor.InstructorHomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".view.activity.admin.student.StudentDetailsActivity" />
+        <activity android:name=".view.activity.admin.student.StudentsActivity" />
+        <activity android:name=".view.activity.admin.course.CourseDetailsActivity" />
+        <activity android:name=".view.activity.admin.course.CoursesActivity" />
+        <activity android:name=".view.activity.admin.instructor.InstructorDetailsActivity" />
+        <activity android:name=".view.activity.admin.instructor.InstructorActivity" />
+        <activity android:name=".view.activity.admin.AdminHomeActivity" />
         <activity android:name=".view.activity.admin.grade.GradesDetailsActivity" />
         <activity android:name=".view.activity.admin.grade.GradesActivity" />
         <activity android:name=".MainActivity" />

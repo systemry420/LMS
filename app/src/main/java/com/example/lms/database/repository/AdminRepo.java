@@ -8,10 +8,12 @@ import com.example.lms.database.AppDatabase;
 import com.example.lms.database.dao.CourseDao;
 import com.example.lms.database.dao.GradeDao;
 import com.example.lms.database.dao.InstructorDao;
+import com.example.lms.database.dao.LectureDao;
 import com.example.lms.database.dao.StudentDao;
 import com.example.lms.model.Course;
 import com.example.lms.model.Grade;
 import com.example.lms.model.Instructor;
+import com.example.lms.model.Lecture;
 import com.example.lms.model.Student;
 
 import java.util.List;
