@@ -9,11 +9,13 @@ import androidx.room.TypeConverters;
 
 import com.example.lms.DateConverter;
 import com.example.lms.database.dao.CourseDao;
+import com.example.lms.database.dao.ExamDao;
 import com.example.lms.database.dao.GradeDao;
 import com.example.lms.database.dao.InstructorDao;
 import com.example.lms.database.dao.LectureDao;
 import com.example.lms.database.dao.StudentDao;
 import com.example.lms.model.Course;
+import com.example.lms.model.Exam;
 import com.example.lms.model.Grade;
 import com.example.lms.model.Instructor;
 import com.example.lms.model.Lecture;
@@ -27,7 +29,8 @@ import java.util.concurrent.Executors;
         Instructor.class,
         Course.class,
         Student.class,
-        Lecture.class}, version = 6, exportSchema = false)
+        Lecture.class,
+        Exam.class}, version = 6, exportSchema = false)
 @TypeConverters(DateConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase INSTANCE;
@@ -37,6 +40,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract CourseDao courseDao();
     public abstract StudentDao studentDao();
     public abstract LectureDao lectureDao();
+    public abstract ExamDao examDao();
 
     public static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NB_OF_THREADS);

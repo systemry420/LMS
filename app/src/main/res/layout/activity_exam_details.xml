@@ -1,9 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".view.activity.instructor.exam.ExamDetailsActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="200dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <CalendarView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/exam_date" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:hint="@string/exam_duration"
+                    app:errorEnabled="true"
+                    style="@style/textInputStyle">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txt_exam_duration"
+                        android:layout_width="match_parent"
+                        android:inputType="number"
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_proceed"
+                    android:layout_margin="@dimen/marginRight"
+                    android:text="@string/proceed_to_questions" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    style="@style/textInputStyle"
+                    android:entries="@array/question_types"
+                    android:id="@+id/spinner_question_type" />
+
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_submit_exam"
+                    android:backgroundTint="#ff5555"
+                    android:layout_margin="@dimen/marginRight"
+                    android:text="@string/submit_exam" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_next_question"
+                    android:layout_margin="@dimen/marginRight"
+                    android:text="@string/next_question" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/qa_layout"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:hint="@string/question"
+                        app:errorEnabled="true"
+                        style="@style/textInputStyle">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/txt_question_qa"
+                            android:layout_width="match_parent"
+                            android:inputType="number"
+                            android:layout_height="wrap_content"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mcq_layout"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:hint="@string/question"
+                        app:errorEnabled="true"
+                        style="@style/textInputStyle">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/txt_question_mcq"
+                            android:layout_width="match_parent"
+                            android:inputType="number"
+                            android:layout_height="wrap_content"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:hint="@string/option_1"
+                        style="@style/textInputStyle">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/txt_mcq_option1"
+                            android:layout_width="match_parent"
+                            android:inputType="number"
+                            android:layout_height="wrap_content"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:hint="@string/option_2"
+                        style="@style/textInputStyle">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/txt_mcq_option2"
+                            android:layout_width="match_parent"
+                            android:inputType="number"
+                            android:layout_height="wrap_content"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:hint="@string/option_3"
+                        style="@style/textInputStyle">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/txt_mcq_option3"
+                            android:layout_width="match_parent"
+                            android:inputType="number"
+                            android:layout_height="wrap_content"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

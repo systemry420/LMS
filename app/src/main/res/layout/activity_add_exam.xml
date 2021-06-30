@@ -1,9 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.activity.instructor.exam.AddExamActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Spinner
+        style="@style/textInputStyle"
+        android:padding="28dp"
+        android:id="@+id/spinner_grade_exam" />
+
+    <Spinner
+        style="@style/textInputStyle"
+        android:padding="28dp"
+        android:layout_below="@id/spinner_grade_exam"
+        android:id="@+id/spinner_course_exam" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@id/spinner_course_exam"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/list_item"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:id="@+id/instructor_exam_recycler_view" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:onClick="openDetailsActivity"
+        android:src="@drawable/ic_add"
+        android:layout_margin="16dp" />
+
+</RelativeLayout>
