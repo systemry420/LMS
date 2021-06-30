@@ -14,7 +14,7 @@ import java.util.List;
 @Dao
 public abstract class GradeDao {
     @Insert
-    public abstract void insertGrade(Grade gradeModel);
+    public abstract long insertGrade(Grade gradeModel);
 
     @Update
     public abstract void updateGrade(Grade gradeModel);

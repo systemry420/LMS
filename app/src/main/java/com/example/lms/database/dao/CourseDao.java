@@ -15,7 +15,7 @@ import java.util.List;
 public abstract class CourseDao {
 
     @Insert
-    public abstract void insertCourse(Course course);
+    public abstract long insertCourse(Course course);
 
     @Update
     public abstract void updateCourse(Course course);

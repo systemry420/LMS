@@ -14,7 +14,7 @@ import java.util.List;
 @Dao
 public abstract class StudentDao {
     @Insert
-    public abstract void insertStudent(Student student);
+    public abstract long insertStudent(Student student);
 
     @Update
     public abstract void updateStudent(Student student);

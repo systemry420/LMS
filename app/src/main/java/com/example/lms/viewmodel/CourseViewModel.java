@@ -24,8 +24,8 @@ public class CourseViewModel extends AndroidViewModel {
         return allCourses;
     }
 
-    public void insertCourse(Course course) {
-        adminRepo.insertCourse(course);
+    public long insertCourse(Course course) {
+        return adminRepo.insertCourse(course);
     }
 
 }

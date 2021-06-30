@@ -26,8 +26,8 @@ public class InstructorViewModel extends AndroidViewModel {
         return allInstructors;
     }
 
-    public void insertInstructor(Instructor instructor) {
-        adminRepo.insertInstructor(instructor);
+    public long insertInstructor(Instructor instructor) {
+        return adminRepo.insertInstructor(instructor);
     }
 
 }

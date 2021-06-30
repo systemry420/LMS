@@ -9,7 +9,10 @@ public class Instructor {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "instructor_id")
-    private int instructorID;
+    private long instructorID;
+
+    @ColumnInfo(name = "grade_id")
+    private long gradeID;
 
     @ColumnInfo
     private String name;
@@ -24,7 +27,8 @@ public class Instructor {
     @ColumnInfo(name = "last_login")
     private String lastLogin;
 
-    public Instructor(String name, String address, String phone, String email, String password) {
+    public Instructor(long gradeID, String name, String address, String phone, String email, String password) {
+        this.gradeID = gradeID;
         this.name = name;
         this.address = address;
         this.phone = phone;
@@ -32,11 +36,33 @@ public class Instructor {
         this.password = password;
     }
 
-    public int getInstructorID() {
+    @Override
+    public String toString() {
+        return "Instructor{" +
+                "instructorID=" + instructorID +
+                ", gradeID=" + gradeID +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", lastLogin='" + lastLogin + '\'' +
+                '}';
+    }
+
+    public long getGradeID() {
+        return gradeID;
+    }
+
+    public void setGradeID(long gradeID) {
+        this.gradeID = gradeID;
+    }
+
+    public long getInstructorID() {
         return instructorID;
     }
 
-    public void setInstructorID(int instructorID) {
+    public void setInstructorID(long instructorID) {
         this.instructorID = instructorID;
     }
 

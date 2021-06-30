@@ -24,7 +24,7 @@ public class GradeViewModel extends AndroidViewModel {
         return allGrades;
     }
 
-    public void insertGrade(Grade grade) {
-        adminRepo.insertGrade(grade);
+    public long insertGrade(Grade grade) {
+        return adminRepo.insertGrade(grade);
     }
 }

@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 public class Grade {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "grade_id")
-    private int gradeID;
+    private long gradeID;
 
     @ColumnInfo(name = "g_name")
     private String gradeName;
@@ -17,11 +17,11 @@ public class Grade {
         this.gradeName = gradeName;
     }
 
-    public int getGradeID() {
+    public long getGradeID() {
         return gradeID;
     }
 
-    public void setGradeID(int gradeID) {
+    public void setGradeID(long gradeID) {
         this.gradeID = gradeID;
     }
 

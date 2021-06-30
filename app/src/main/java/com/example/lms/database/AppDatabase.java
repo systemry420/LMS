@@ -18,7 +18,7 @@ import com.example.lms.model.Student;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Grade.class, Instructor.class, Course.class, Student.class}, version = 2)
+@Database(entities = {Grade.class, Instructor.class, Course.class, Student.class}, version = 4)
 public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase INSTANCE;
     private static final int NB_OF_THREADS = 5;

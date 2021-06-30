@@ -9,10 +9,10 @@ public class Student {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "student_id")
-    private int studentID;
+    private long studentID;
 
     @ColumnInfo(name = "grade_id")
-    private int gradeID;
+    private long gradeID;
 
     @ColumnInfo
     private String name;
@@ -27,7 +27,7 @@ public class Student {
     @ColumnInfo
     private String lastLogin;
 
-    public Student(int gradeID, String name, String address, String email, String password, String phone) {
+    public Student(long gradeID, String name, String address, String email, String password, String phone) {
         this.gradeID = gradeID;
         this.name = name;
         this.address = address;
@@ -36,19 +36,33 @@ public class Student {
         this.phone = phone;
     }
 
-    public int getStudentID() {
+    @Override
+    public String toString() {
+        return "Student{" +
+                "studentID=" + studentID +
+                ", gradeID=" + gradeID +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
+                ", lastLogin='" + lastLogin + '\'' +
+                '}';
+    }
+
+    public long getStudentID() {
         return studentID;
     }
 
-    public void setStudentID(int studentID) {
+    public void setStudentID(long studentID) {
         this.studentID = studentID;
     }
 
-    public int getGradeID() {
+    public long getGradeID() {
         return gradeID;
     }
 
-    public void setGradeID(int gradeID) {
+    public void setGradeID(long gradeID) {
         this.gradeID = gradeID;
     }
 

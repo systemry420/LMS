@@ -15,6 +15,7 @@ import com.example.lms.model.Instructor;
 import com.example.lms.model.Student;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class AdminRepo {
     private static final String TAG = "AdminRepo";
@@ -57,28 +58,40 @@ public class AdminRepo {
         return allStudents;
     }
 
-    public void insertStudent(Student student) {
+    public long insertStudent(Student student) {
+        AtomicLong id = new AtomicLong();
         AppDatabase.databaseWriteExecutor.execute(() -> {
-            studentDao.insertStudent(student);
+            id.set(studentDao.insertStudent(student));
         });
+
+        return id.get();
     }
 
-    public void insertGrade(Grade grade) {
+    public long insertGrade(Grade grade) {
+        AtomicLong id = new AtomicLong();
         AppDatabase.databaseWriteExecutor.execute(() -> {
-            gradeDao.insertGrade(grade);
+            id.set(gradeDao.insertGrade(grade));
         });
+
+        return id.get();
     }
 
-    public void insertInstructor(Instructor instructor) {
+    public long insertInstructor(Instructor instructor) {
+        AtomicLong id = new AtomicLong();
         AppDatabase.databaseWriteExecutor.execute(() -> {
-            instructorDao.insertInstructor(instructor);
+            id.set(instructorDao.insertInstructor(instructor));
         });
+
+        return id.get();
     }
 
-    public void insertCourse(Course course) {
+    public long insertCourse(Course course) {
+        AtomicLong id = new AtomicLong();
         AppDatabase.databaseWriteExecutor.execute(() -> {
-            courseDao.insertCourse(course);
+            id.set(courseDao.insertCourse(course));
         });
+
+        return id.get();
     }
 
 }

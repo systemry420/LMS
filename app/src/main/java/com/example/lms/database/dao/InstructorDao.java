@@ -15,7 +15,7 @@ import java.util.List;
 public abstract class InstructorDao {
 
     @Insert
-    public abstract void insertInstructor(Instructor instructor);
+    public abstract long insertInstructor(Instructor instructor);
 
     @Update
     public abstract void updateInstructor(Instructor instructor);
