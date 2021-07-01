@@ -21,7 +21,7 @@ public class AddExamActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_exam);
 
-        recyclerView = findViewById(R.id.instructor_lectures_recycler_view);
+        recyclerView = findViewById(R.id.instructor_exam_recycler_view);
 
         LecturesAdapter adapter = new LecturesAdapter();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

@@ -1,4 +1,4 @@
-package com.example.lms;
+package com.example.lms.util;
 
 import androidx.annotation.NonNull;
 

@@ -15,12 +15,17 @@ public class Exam {
     @ColumnInfo
     private String title;
     @ColumnInfo
+    private String date;
+    @ColumnInfo
     private int score;
+    @ColumnInfo
+    private int duration;
 
-    public Exam(Long courseID, String title, int score) {
+    public Exam(Long courseID, String title, int duration, Long date, int score) {
         this.courseID = courseID;
         this.title = title;
         this.score = score;
+        this.date = date;
     }
 
     public Long getExamID() {
@@ -53,5 +58,14 @@ public class Exam {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

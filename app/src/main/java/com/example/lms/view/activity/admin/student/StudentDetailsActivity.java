@@ -16,7 +16,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.lms.R;
-import com.example.lms.SpinnerItem;
+import com.example.lms.util.SpinnerItem;
 import com.example.lms.model.Grade;
 import com.example.lms.model.Student;
 import com.example.lms.viewmodel.GradeViewModel;

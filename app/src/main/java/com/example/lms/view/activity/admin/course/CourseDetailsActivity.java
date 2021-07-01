@@ -13,11 +13,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lms.R;
-import com.example.lms.SpinnerItem;
+import com.example.lms.util.SpinnerItem;
 import com.example.lms.model.Course;
 import com.example.lms.model.Grade;
 import com.example.lms.model.Instructor;

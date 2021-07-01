@@ -16,7 +16,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.lms.R;
-import com.example.lms.SpinnerItem;
+import com.example.lms.util.SpinnerItem;
 import com.example.lms.model.Grade;
 import com.example.lms.model.Instructor;
 import com.example.lms.viewmodel.GradeViewModel;
@@ -24,9 +24,7 @@ import com.example.lms.viewmodel.InstructorViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class InstructorDetailsActivity extends AppCompatActivity {
     private static final String TAG = "InstructorDetailsActivi";

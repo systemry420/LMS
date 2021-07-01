@@ -17,7 +17,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.lms.R;
-import com.example.lms.SpinnerItem;
+import com.example.lms.util.SpinnerItem;
 import com.example.lms.model.Course;
 import com.example.lms.model.Lecture;
 import com.example.lms.viewmodel.CourseViewModel;
@@ -29,12 +29,13 @@ import java.util.List;
 
 public class LectureDetailsActivity extends AppCompatActivity {
     private static final String TAG = "LectureDetailsActivity";
-    TextInputEditText txtLectureTitle, txtLectureLink;
-    CalendarView calendarView;
-    LectureViewModel lectureViewModel; CourseViewModel courseViewModel;
-    Spinner spinnerCourse;
-    List<SpinnerItem> coursesList;
-    SpinnerItem selectedCourse;
+    private TextInputEditText txtLectureTitle, txtLectureLink;
+    private CalendarView calendarView;
+    private LectureViewModel lectureViewModel;
+    private CourseViewModel courseViewModel;
+    private Spinner spinnerCourse;
+    private List<SpinnerItem> coursesList;
+    private SpinnerItem selectedCourse;
 
 
     @Override

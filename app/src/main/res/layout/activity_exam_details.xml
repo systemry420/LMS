@@ -22,12 +22,47 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/layout_exam_details"
                 android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:layout_margin="@dimen/marginRight"
+                    android:text="Exam date" />
 
                 <CalendarView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/exam_date" />
+                    android:id="@+id/calendar_exam_date" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:layout_margin="@dimen/marginRight"
+                    android:text="Exam time" />
+
+                <TimePicker
+                    android:layout_width="match_parent"
+                    android:timePickerMode="spinner"
+                    android:layout_height="wrap_content" />
+
+                <Spinner
+                    android:id="@+id/spinner_exam_course"
+                    android:layout_height="60dp"
+                    style="@style/textInputStyle" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:hint="Exam title"
+                    app:errorEnabled="true"
+                    style="@style/textInputStyle">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txt_exam_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:hint="@string/exam_duration"
@@ -41,9 +76,22 @@
                         android:layout_height="wrap_content"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <Button
+                <com.google.android.material.textfield.TextInputLayout
+                    android:hint="@string/exam_score"
+                    app:errorEnabled="true"
+                    style="@style/textInputStyle">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txt_exam_score"
+                        android:inputType="number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.button.MaterialButton
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
+                    app:cornerRadius="30dp"
                     android:id="@+id/btn_proceed"
                     android:layout_margin="@dimen/marginRight"
                     android:text="@string/proceed_to_questions" />
@@ -53,6 +101,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:id="@+id/layout_exam_questions"
                 android:orientation="vertical">
 
                 <Spinner
@@ -62,18 +112,19 @@
                     android:entries="@array/question_types"
                     android:id="@+id/spinner_question_type" />
 
-
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
+                    app:cornerRadius="30dp"
                     android:id="@+id/btn_submit_exam"
                     android:backgroundTint="#ff5555"
                     android:layout_margin="@dimen/marginRight"
                     android:text="@string/submit_exam" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
+                    app:cornerRadius="30dp"
                     android:id="@+id/btn_next_question"
                     android:layout_margin="@dimen/marginRight"
                     android:text="@string/next_question" />
@@ -93,7 +144,6 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/txt_question_qa"
                             android:layout_width="match_parent"
-                            android:inputType="number"
                             android:layout_height="wrap_content"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -103,6 +153,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/mcq_layout"
+                    android:paddingBottom="100dp"
                     android:orientation="vertical">
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -113,28 +164,27 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/txt_question_mcq"
                             android:layout_width="match_parent"
-                            android:inputType="number"
                             android:layout_height="wrap_content"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:hint="@string/option_1"
+                        app:errorEnabled="true"
                         style="@style/textInputStyle">
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/txt_mcq_option1"
                             android:layout_width="match_parent"
-                            android:inputType="number"
                             android:layout_height="wrap_content"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:hint="@string/option_2"
+                        app:errorEnabled="true"
                         style="@style/textInputStyle">
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/txt_mcq_option2"
                             android:layout_width="match_parent"
-                            android:inputType="number"
                             android:layout_height="wrap_content"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -144,9 +194,25 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/txt_mcq_option3"
                             android:layout_width="match_parent"
-                            android:inputType="number"
                             android:layout_height="wrap_content"/>
                     </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="100dp"
+                    android:orientation="vertical">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_below="@id/spinner_course_lecture"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:listitem="@layout/list_item"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:id="@+id/exam_questions_recycler_view" />
+
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

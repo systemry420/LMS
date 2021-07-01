@@ -4,10 +4,6 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.example.lms.DateConverter;
-
-import java.util.Date;
-
 @Entity(tableName = "lectures")
 public class Lecture {
     @PrimaryKey(autoGenerate = true)
