@@ -27,4 +27,8 @@ public class GradeViewModel extends AndroidViewModel {
     public long insertGrade(Grade grade) {
         return adminRepo.insertGrade(grade);
     }
+
+    public void deleteGrade(Grade grade) {
+        adminRepo.deleteGrade(grade);
+    }
 }

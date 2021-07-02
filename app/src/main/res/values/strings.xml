@@ -43,4 +43,5 @@
     <string name="email">Email</string>
     <string name="login_as_admin">Login as admin</string>
     <string name="login">Login</string>
+    <string name="delete">Delete</string>
 </resources>

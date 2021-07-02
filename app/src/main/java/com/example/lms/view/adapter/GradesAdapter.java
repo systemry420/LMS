@@ -3,6 +3,7 @@ package com.example.lms.view.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,8 +18,52 @@ import org.jetbrains.annotations.NotNull;
 
 public class GradesAdapter extends ListAdapter<Grade, GradesAdapter.GradesViewHolder> {
 
+    public interface OnItemClickListener {
+        void onClickItem(Grade grade);
+    }
+
+    public interface OnDeleteItemClickListener {
+        void onDeleteItem(Grade grade);
+    }
+
+    private OnItemClickListener listener;
+    private OnDeleteItemClickListener deleteListener;
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    public void setOnDeleteListener(OnDeleteItemClickListener listener) {
+        this.deleteListener = listener;
+    }
+
     public GradesAdapter() {
         super(DIFF_CALLBACK);
+    }
+
+
+    class GradesViewHolder extends RecyclerView.ViewHolder {
+        private final TextView textView;
+        private final ImageButton deleteIcon;
+        public GradesViewHolder(@NonNull @NotNull View itemView) {
+            super(itemView);
+            textView = itemView.findViewById(R.id.item_title);
+            deleteIcon = itemView.findViewById(R.id.icon_delete_item);
+
+            itemView.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                if(listener != null && position != RecyclerView.NO_POSITION) {
+                    listener.onClickItem(getItem(position));
+                }
+            });
+
+            deleteIcon.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                if(listener != null && position != RecyclerView.NO_POSITION) {
+                    deleteListener.onDeleteItem(getItem(position));
+                }
+            });
+        }
     }
 
     public static final DiffUtil.ItemCallback<Grade> DIFF_CALLBACK = new DiffUtil.ItemCallback<Grade>() {
@@ -46,14 +91,6 @@ public class GradesAdapter extends ListAdapter<Grade, GradesAdapter.GradesViewHo
     public void onBindViewHolder(@NonNull @NotNull GradesViewHolder holder, int position) {
         Grade currentGrade = getItem(position);
         holder.textView.setText(currentGrade.getGradeName());
-    }
-
-    static class GradesViewHolder extends RecyclerView.ViewHolder {
-        private final TextView textView;
-        public GradesViewHolder(@NonNull @NotNull View itemView) {
-            super(itemView);
-            textView = itemView.findViewById(R.id.item_title);
-        }
     }
 
 }

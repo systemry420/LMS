@@ -96,4 +96,10 @@ public class AdminRepo {
         return id.get();
     }
 
+    public void deleteGrade(Grade grade) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            gradeDao.deleteGrade(grade);
+        });
+    }
+
 }
