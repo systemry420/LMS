@@ -12,6 +12,13 @@
         android:src="@drawable/ic_launcher_background"
         android:layout_height="200dp" />
 
+    <TextView
+        android:id="@+id/admin_login_textview_error"
+        android:text="Invalid email or password"
+        android:visibility="invisible"
+        style="@style/txtViewError"
+        />
+
     <com.google.android.material.textfield.TextInputLayout
         android:hint="@string/email"
         app:errorEnabled="true"

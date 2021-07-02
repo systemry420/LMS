@@ -197,7 +197,7 @@ public class ExamDetailsActivity extends AppCompatActivity {
     }
 
     private void nextQuestion() {
-        // todo clear input, add q type to each Q
+        // todo clear input, add q type to each Q, add true/false
         if (questionType.equals("qa")) {
             String title = txtQaQuestion.getText().toString();
             Question questionAnswer = new Question();

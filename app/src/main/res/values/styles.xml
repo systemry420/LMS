@@ -37,4 +37,14 @@
     <style name="dangerButtonStyle" parent="buttonStyle">
         <item name="backgroundTint">#ff5555</item>
     </style>
+
+    <style name="txtViewError">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_margin">@dimen/marginTop</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.AppCompat.Large</item>
+        <item name="android:textColor">@color/error</item>
+    </style>
 </resources>
