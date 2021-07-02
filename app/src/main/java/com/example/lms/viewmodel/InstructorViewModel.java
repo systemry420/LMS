@@ -30,4 +30,12 @@ public class InstructorViewModel extends AndroidViewModel {
         return adminRepo.insertInstructor(instructor);
     }
 
+    public void deleteInstructor(Instructor instructor) {
+        adminRepo.deleteInstructor(instructor);
+    }
+
+    public void updateInstructor(Instructor instructor) {
+        adminRepo.updateInstructor(instructor);
+    }
+
 }

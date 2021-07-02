@@ -19,7 +19,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:onClick="addNewGrade"
+        android:id="@+id/btn_add_grade"
         android:text="@string/add_grade"
         style="@style/textInputStyle" />
 

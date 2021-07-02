@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.lms.R;
@@ -28,12 +29,21 @@ public class GradesActivity extends AppCompatActivity {
     private TextInputEditText textGrade;
     private GradesAdapter adapter;
     private AlertDialog.Builder alertDialog;
+    private Button addButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grades);
 
         textGrade = findViewById(R.id.txt_grade_name);
+        addButton = findViewById(R.id.btn_add_grade);
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addNewGrade();
+            }
+        });
         alertDialog = new AlertDialog.Builder(this);
 
         recyclerView = findViewById(R.id.recycler_view);
@@ -51,12 +61,10 @@ public class GradesActivity extends AppCompatActivity {
     private void setAdapterListeners() {
         adapter.setOnItemClickListener(grade -> Toast.makeText(GradesActivity.this, "details activity", Toast.LENGTH_LONG).show());
 
-        adapter.setOnDeleteListener(grade -> {
-            deleteGrade(grade);
-        });
+        adapter.setOnDeleteListener(this::deleteGrade);
     }
 
-    private void addNewGrade(View view) {
+    private void addNewGrade() {
         if(textGrade.getText().toString().equals("")) {
             textGrade.setError("Please enter a name for grade");
             return;
@@ -71,7 +79,7 @@ public class GradesActivity extends AppCompatActivity {
     private void deleteGrade(Grade grade) {
         alertDialog
                 .setTitle("Delete")
-                .setMessage("Are you sure you want to delete the grade")
+                .setMessage("Are you sure you want to delete this grade?")
                 .setCancelable(false)
                 .setPositiveButton("Yes", (dialog, which) -> {
                     gradeViewModel.deleteGrade(grade);

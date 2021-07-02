@@ -102,4 +102,16 @@ public class AdminRepo {
         });
     }
 
+    public void deleteInstructor(Instructor instructor) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            instructorDao.deleteInstructor(instructor);
+        });
+    }
+
+    public void updateInstructor(Instructor instructor) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            instructorDao.updateInstructor(instructor);
+        });
+    }
+
 }

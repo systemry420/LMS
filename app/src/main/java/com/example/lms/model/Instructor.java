@@ -6,8 +6,10 @@ import androidx.room.PrimaryKey;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serializable;
+
 @Entity(tableName = "instructor")
-public class Instructor {
+public class Instructor implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "instructor_id")

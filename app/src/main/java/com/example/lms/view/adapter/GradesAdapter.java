@@ -18,22 +18,22 @@ import org.jetbrains.annotations.NotNull;
 
 public class GradesAdapter extends ListAdapter<Grade, GradesAdapter.GradesViewHolder> {
 
-    public interface OnItemClickListener {
+    public interface OnGradeClickListener {
         void onClickItem(Grade grade);
     }
 
-    public interface OnDeleteItemClickListener {
+    public interface OnDeleteGradeClickListener {
         void onDeleteItem(Grade grade);
     }
 
-    private OnItemClickListener listener;
-    private OnDeleteItemClickListener deleteListener;
+    private OnGradeClickListener listener;
+    private OnDeleteGradeClickListener deleteListener;
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
+    public void setOnItemClickListener(OnGradeClickListener listener) {
         this.listener = listener;
     }
 
-    public void setOnDeleteListener(OnDeleteItemClickListener listener) {
+    public void setOnDeleteListener(OnDeleteGradeClickListener listener) {
         this.deleteListener = listener;
     }
 
