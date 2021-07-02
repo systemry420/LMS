@@ -15,7 +15,7 @@ public class Exam {
     @ColumnInfo
     private String title;
     @ColumnInfo
-    private String date;
+    private Long date;
     @ColumnInfo
     private int score;
     @ColumnInfo
@@ -60,12 +60,19 @@ public class Exam {
         this.score = score;
     }
 
-
-    public String getDate() {
+    public Long getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Long date) {
         this.date = date;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 }

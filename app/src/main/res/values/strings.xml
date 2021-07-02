@@ -40,4 +40,7 @@
     <string name="option_2">Option 2</string>
     <string name="option_1">Option 1</string>
     <string name="exam_score">Exam score</string>
+    <string name="email">Email</string>
+    <string name="login_as_admin">Login as admin</string>
+    <string name="login">Login</string>
 </resources>

@@ -5,10 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.activity.student.StudentLoginActivity">
+    tools:context=".view.activity.instructor.InstructorLoginActivity">
 
     <ImageView
         android:layout_width="match_parent"
+        android:src="@drawable/ic_launcher_background"
         android:layout_height="200dp" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -16,7 +17,7 @@
         app:errorEnabled="true"
         style="@style/textInputStyle">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txt_student_login_email"
+            android:id="@+id/txt_instructor_login_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -26,13 +27,23 @@
         app:errorEnabled="true"
         style="@style/textInputStyle">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txt_student_login_password"
+            android:id="@+id/txt_instructor_login_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         style="@style/buttonStyle"
-        android:onClick="loginStudent"
-        android:text="Login" />
+        android:onClick="loginInstructor"
+        android:text="@string/login" />
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="@dimen/marginRight"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:cornerRadius="20dp"
+        android:onClick="openAdminLogin"
+        android:text="@string/login_as_admin" />
+
 </LinearLayout>

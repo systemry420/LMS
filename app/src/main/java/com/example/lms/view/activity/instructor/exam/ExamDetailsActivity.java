@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -40,7 +41,7 @@ public class ExamDetailsActivity extends AppCompatActivity {
             txtMcqOption1, txtMcqOption2, txtMcqOption3;
     private String examTitle, qaQuestion, mcqQuestion, mcqOption1, mcqOption2, mcqOption3;
     private int examScore, examDuration;
-    private MaterialButton btnProceed, btnNextQuestion, btnSubmitExam;
+    private Button btnProceed, btnNextQuestion, btnSubmitExam;
     private Spinner spinnerQuestionType, spinnerCourse;
     private String questionType;
     private List<Question> questionList = new ArrayList<>();
@@ -161,9 +162,9 @@ public class ExamDetailsActivity extends AppCompatActivity {
     }
 
     private void submitExam() {
-        //todo : set exam details
+        //todo : save time in database
         Long courseID = selectedCourse.getId();
-        Exam exam = new Exam(courseID,examTitle, examDuration, examDate, examScore);
+        Exam exam = new Exam(courseID, examTitle, examDuration, examDate, examScore);
 
         long examID = examViewModel.insertExam(exam);
         examViewModel.insertQuestionsToExam(questionList);
@@ -190,12 +191,13 @@ public class ExamDetailsActivity extends AppCompatActivity {
         examTitle = txtExamTitle.getText().toString();
         examScore = Integer.parseInt(txtExamScore.getText().toString());
         examDuration = Integer.parseInt(txtExamDuration.getText().toString());
-
+        //todo clear input
         detailsLayout.setVisibility(View.GONE);
         questionsLayout.setVisibility(View.VISIBLE);
     }
 
     private void nextQuestion() {
+        // todo clear input, add q type to each Q
         if (questionType.equals("qa")) {
             String title = txtQaQuestion.getText().toString();
             Question questionAnswer = new Question();
