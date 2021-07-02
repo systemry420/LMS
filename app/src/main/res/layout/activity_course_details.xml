@@ -20,16 +20,17 @@
             android:orientation="vertical">
 
             <ImageView
+                android:src="@drawable/ic_launcher_background"
                 android:layout_width="match_parent"
                 android:layout_height="200dp" />
             <Spinner
                 style="@style/textInputStyle"
-                android:padding="28dp"
+                android:layout_height="60dp"
                 android:id="@+id/spinner_grade_id" />
 
             <Spinner
                 style="@style/textInputStyle"
-                android:padding="28dp"
+                android:layout_height="60dp"
                 android:id="@+id/spinner_instructor_id" />
 
 

@@ -11,6 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="200dp" />
 
+    <TextView
+        android:id="@+id/student_login_textview_error"
+        android:text="Invalid email or password"
+        android:visibility="invisible"
+        style="@style/txtViewError"
+        />
+
     <com.google.android.material.textfield.TextInputLayout
         android:hint="@string/email"
         app:errorEnabled="true"

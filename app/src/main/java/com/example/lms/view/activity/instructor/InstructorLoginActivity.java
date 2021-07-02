@@ -16,6 +16,8 @@ import com.example.lms.viewmodel.InstructorViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class InstructorLoginActivity extends AppCompatActivity {
     private TextInputEditText txtEmail, txtPassword;
@@ -32,7 +34,10 @@ public class InstructorLoginActivity extends AppCompatActivity {
 
         instructorViewModel = new ViewModelProvider(this).get(InstructorViewModel.class);
 
+    }
 
+    public void openAdminLogin(View view) {
+        startActivity(new Intent(this, AdminLoginActivity.class));
     }
 
     public void loginInstructor(View view) {
@@ -53,20 +58,23 @@ public class InstructorLoginActivity extends AppCompatActivity {
                     String password = instructor.getPassword();
 
                     if (email.equals(txtEmail.getText().toString())
-                        && password.equals(txtPassword.getText().toString())) {
-                            startActivity(new Intent(InstructorLoginActivity.this,
-                                    InstructorHomeActivity.class));
+                            && password.equals(txtPassword.getText().toString())) {
+                        startActivity(new Intent(InstructorLoginActivity.this,
+                                InstructorHomeActivity.class));
                         break;
                     }
                     else {
                         textViewError.setVisibility(View.VISIBLE);
+                        new Timer().schedule(new TimerTask() {
+                            @Override
+                            public void run() {
+                                textViewError.setVisibility(View.INVISIBLE);
+                            }
+                        }, 2000);
                     }
                 }
             }
         });
     }
 
-    public void openAdminLogin(View view) {
-        startActivity(new Intent(this, AdminLoginActivity.class));
-    }
 }
