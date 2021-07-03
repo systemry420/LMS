@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".view.activity.instructor.InstructorHomeActivity">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/add_lecture"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -17,9 +17,9 @@
         <TextView
             style="@style/cardTextStyle"
             android:text="@string/add_lecture" />
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/add_exam"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -29,9 +29,9 @@
         <TextView
             style="@style/cardTextStyle"
             android:text="@string/add_exam" />
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/correct_exam"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -41,6 +41,6 @@
         <TextView
             style="@style/cardTextStyle"
             android:text="@string/correct_exam" />
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>

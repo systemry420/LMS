@@ -2,8 +2,10 @@ package com.example.lms.util;
 
 import androidx.room.TypeConverter;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class DateConverter {
     @TypeConverter
@@ -29,6 +31,13 @@ public class DateConverter {
 //        val year1 = calendar.get(Calendar.YEAR)
 //        val month1 = calendar.get(Calendar.MONTH)
 //        val day1 = calendar.get(Calendar.DAY_OF_MONTH)
+    }
+
+    public static String getCurrentDate() {
+        Date now = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("MMM, dd, yyyy HH:mm",
+                Locale.getDefault());
+        return df.format(now);
     }
 
 

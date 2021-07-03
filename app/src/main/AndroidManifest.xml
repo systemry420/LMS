@@ -32,6 +32,7 @@
         <activity
             android:name=".view.activity.instructor.InstructorHomeActivity"
             android:label="Instructor Home">
+
         </activity>
         <activity android:name=".view.activity.admin.student.StudentDetailsActivity" />
         <activity android:name=".view.activity.admin.student.StudentsActivity" />

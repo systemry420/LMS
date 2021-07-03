@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-    </style>
-
-    <style name="cardStyle">
+    <style name="cardStyle" parent="Widget.MaterialComponents.CardView">
         <item name="android:layout_marginTop">@dimen/marginTop</item>
         <item name="android:layout_marginBottom">@dimen/marginBottom</item>
         <item name="android:layout_marginRight">@dimen/marginRight</item>

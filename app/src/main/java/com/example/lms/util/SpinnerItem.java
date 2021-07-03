@@ -5,8 +5,8 @@ import androidx.annotation.NonNull;
 import org.jetbrains.annotations.NotNull;
 
 public class SpinnerItem {
-    public Long id;
-    public String caption;
+    private Long id;
+    private String caption;
 
     public SpinnerItem(Long id, String caption) {
         this.id = id;

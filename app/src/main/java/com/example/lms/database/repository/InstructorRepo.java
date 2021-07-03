@@ -5,10 +5,13 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import com.example.lms.database.AppDatabase;
+import com.example.lms.database.dao.CourseDao;
 import com.example.lms.database.dao.ExamDao;
 import com.example.lms.database.dao.LectureDao;
 import com.example.lms.database.dao.QuestionDao;
+import com.example.lms.model.Course;
 import com.example.lms.model.Exam;
+import com.example.lms.model.Grade;
 import com.example.lms.model.Lecture;
 import com.example.lms.model.Question;
 import com.google.android.material.progressindicator.LinearProgressIndicatorSpec;
@@ -20,6 +23,7 @@ public class InstructorRepo {
     private final LectureDao lectureDao;
     private final ExamDao examDao;
     private final QuestionDao questionDao;
+    private final CourseDao courseDao;
     private final LiveData<List<Lecture>> allLectures;
     private final LiveData<List<Exam>> allExams;
     private LiveData<List<Question>> questionsOfExam;
@@ -30,6 +34,7 @@ public class InstructorRepo {
         lectureDao = db.lectureDao();
         examDao = db.examDao();
         questionDao = db.questionDao();
+        courseDao = db.courseDao();
 
 
         allLectures = lectureDao.getAllLectures();
@@ -41,8 +46,17 @@ public class InstructorRepo {
         return questionsOfExam;
     }
 
+
+    public LiveData<List<Course>> getCoursesOfGrade(long gradeID) {
+        return courseDao.getCourseOfGrade(gradeID);
+    }
+
     public LiveData<List<Lecture>> getAllLectures() {
         return allLectures;
+    }
+
+    public LiveData<List<Lecture>> getLecturesOfCourse(long courseID) {
+        return lectureDao.getLecturesOfCourse(courseID);
     }
 
     public LiveData<List<Exam>> getAllExams() {
@@ -72,5 +86,18 @@ public class InstructorRepo {
             questionDao.insertQuestions(questionList);
         });
     }
+
+    public void updateLecture(Lecture lecture) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            lectureDao.updateLecture(lecture);
+        });
+    }
+
+    public void deleteLecture(Lecture lecture) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            lectureDao.deleteLecture(lecture);
+        });
+    }
+
 
 }

@@ -35,7 +35,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
     private Spinner spinnerGrade, spinnerInstructor;
     private GradeViewModel gradeViewModel; InstructorViewModel instructorViewModel;
     private List<SpinnerItem> gradesList, instructorList;
-    private SpinnerItem gradeID, instructorID;
+    private SpinnerItem selectedGrade, instructorID;
     private ArrayAdapter<SpinnerItem> gradeAdapter, instructorAdapter;
     private Course currentCourse;
 
@@ -57,6 +57,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
         setSpinners();
 
         checkIntent();
+
     }
 
     private void checkIntent() {
@@ -80,13 +81,12 @@ public class CourseDetailsActivity extends AppCompatActivity {
                 courseViewModel.updateCourse(currentCourse);
             }
             else {
-                Course course = new Course(0, 0, name, desc);
+                Course course = new Course(selectedGrade.getId(), 0, name, desc);
                 long id = courseViewModel.insertCourse(course);
                 Toast.makeText(this, "Course added successfully!", Toast.LENGTH_LONG).show();
             }
             finish();
         }
-
     }
 
     public boolean validateInput() {
@@ -151,7 +151,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.i(TAG, "onItemSelected: " + parent.getItemAtPosition(position));
-                gradeID = (SpinnerItem) parent.getItemAtPosition(position);
+                selectedGrade = (SpinnerItem) parent.getItemAtPosition(position);
             }
 
             @Override

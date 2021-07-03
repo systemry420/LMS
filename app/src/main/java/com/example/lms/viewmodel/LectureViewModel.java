@@ -26,8 +26,20 @@ public class LectureViewModel extends AndroidViewModel {
         return allLectures;
     }
 
+    public LiveData<List<Lecture>> getLecturesOfCourse(long courseID) {
+        return instructorRepo.getLecturesOfCourse(courseID);
+    }
+
     public long insertLecture(Lecture lecture) {
         return instructorRepo.insertLecture(lecture);
+    }
+
+    public void updateLecture(Lecture lecture) {
+        instructorRepo.updateLecture(lecture);
+    }
+
+    public void deleteLecture(Lecture lecture) {
+        instructorRepo.deleteLecture(lecture);
     }
 
 }

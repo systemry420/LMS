@@ -25,4 +25,7 @@ public abstract class LectureDao {
     @Query("SELECT * FROM lectures")
     public abstract LiveData<List<Lecture>> getAllLectures();
 
+    @Query("SELECT * FROM lectures where course_id = :courseID")
+    public abstract LiveData<List<Lecture>> getLecturesOfCourse(long courseID);
+
 }

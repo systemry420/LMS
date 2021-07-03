@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -17,6 +18,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.lms.R;
+import com.example.lms.model.Student;
+import com.example.lms.util.DateConverter;
 import com.example.lms.util.SpinnerItem;
 import com.example.lms.model.Course;
 import com.example.lms.model.Lecture;
@@ -30,12 +33,12 @@ import java.util.List;
 public class LectureDetailsActivity extends AppCompatActivity {
     private static final String TAG = "LectureDetailsActivity";
     private TextInputEditText txtLectureTitle, txtLectureLink;
-    private CalendarView calendarView;
     private LectureViewModel lectureViewModel;
     private CourseViewModel courseViewModel;
     private Spinner spinnerCourse;
     private List<SpinnerItem> coursesList;
     private SpinnerItem selectedCourse;
+    private Lecture currentLecture;
 
 
     @Override
@@ -45,48 +48,28 @@ public class LectureDetailsActivity extends AppCompatActivity {
 
         txtLectureTitle = findViewById(R.id.txt_lecture_title);
         txtLectureLink = findViewById(R.id.txt_lecture_link);
-        calendarView = findViewById(R.id.calendar_lecture_date);
         spinnerCourse = findViewById(R.id.spinner_course_add_lecture);
 
         coursesList = new ArrayList<>();
 
         lectureViewModel = new ViewModelProvider(this).get(LectureViewModel.class);
         courseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);
-        ArrayAdapter<SpinnerItem> coursesAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, coursesList);
-        coursesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerCourse.setAdapter(coursesAdapter);
 
-        courseViewModel.getAllCourses().observe(this, new Observer<List<Course>>() {
-            @Override
-            public void onChanged(List<Course> courses) {
-                for(Course course: courses) {
-                    coursesList.add(new SpinnerItem(course.getCourseID(), course.getName()));
-                }
-                coursesAdapter.notifyDataSetChanged();
-            }
-        });
+        setCourseSpinner();
 
-        spinnerCourse.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectedCourse = (SpinnerItem) parent.getSelectedItem();
-            }
+        checkIntent();
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+    }
 
-            }
-        });
 
-        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                // todo
-                Log.i(TAG, "onSelectedDayChange: " + year + month + dayOfMonth);
-            }
-        });
 
+    private void checkIntent() {
+        Intent intent = getIntent();
+        currentLecture = (Lecture) intent.getSerializableExtra("lecture");
+        if (currentLecture != null) {
+            txtLectureTitle.setText(currentLecture.getLectureTitle());
+            txtLectureLink.setText(currentLecture.getLectureLink());
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -117,12 +100,49 @@ public class LectureDetailsActivity extends AppCompatActivity {
             return;
         }
 
-        String date = "30-6-2021";
-        Lecture lecture = new Lecture(0, title, link, date);
-        long id = lectureViewModel.insertLecture(lecture);
-        Toast.makeText(this, "Lecture added successfully!", Toast.LENGTH_LONG).show();
-        finish();
+        if(currentLecture != null) {
+            currentLecture.setLectureID(currentLecture.getLectureID());
+            currentLecture.setCourseID(currentLecture.getCourseID());
+            currentLecture.setLectureLink(currentLecture.getLectureLink());
+            currentLecture.setLectureDate(currentLecture.getLectureDate());
+        }
+        else {
+            String date = DateConverter.getCurrentDate();
+            Lecture lecture = new Lecture(selectedCourse.getId(), title, link, date);
+            long id = lectureViewModel.insertLecture(lecture);
+            Toast.makeText(this, "Lecture added successfully!", Toast.LENGTH_LONG).show();
+            finish();
+        }
+    }
 
+
+    private void setCourseSpinner() {
+        ArrayAdapter<SpinnerItem> coursesAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, coursesList);
+        coursesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCourse.setAdapter(coursesAdapter);
+
+        courseViewModel.getAllCourses().observe(this, new Observer<List<Course>>() {
+            @Override
+            public void onChanged(List<Course> courses) {
+                for(Course course: courses) {
+                    coursesList.add(new SpinnerItem(course.getCourseID(), course.getName()));
+                }
+                coursesAdapter.notifyDataSetChanged();
+            }
+        });
+
+        spinnerCourse.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedCourse = (SpinnerItem) parent.getSelectedItem();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
 }

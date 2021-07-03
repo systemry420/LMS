@@ -63,7 +63,6 @@ public class StudentsActivity extends AppCompatActivity {
 
     private void deleteCurrentStudent(Student student) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-
         alertDialog
             .setTitle("Delete student")
             .setMessage("Are you sure you want to delete this student?")

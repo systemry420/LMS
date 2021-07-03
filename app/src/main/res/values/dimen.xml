@@ -4,4 +4,9 @@
     <dimen name="marginBottom">8dp</dimen>
     <dimen name="marginLeft">16dp</dimen>
     <dimen name="marginRight">16dp</dimen>
+
+    <dimen name="marginCardTop">12dp</dimen>
+    <dimen name="marginCardBottom">12dp</dimen>
+    <dimen name="marginCardLeft">20dp</dimen>
+    <dimen name="marginCardRight">20dp</dimen>
 </resources>
