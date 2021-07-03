@@ -62,7 +62,6 @@ public class StudentDetailsActivity extends AppCompatActivity {
 
     }
 
-
     private void checkIntent() {
         Intent intent = getIntent();
         currentStudent = (Student) intent.getSerializableExtra("student");
@@ -82,25 +81,25 @@ public class StudentDetailsActivity extends AppCompatActivity {
         password = txtPassword.getText().toString();
         phone = txtPhone.getText().toString();
 
-        if (currentStudent != null) {
-            validateInput();
-            currentStudent.setStudentID(currentStudent.getStudentID());
-            currentStudent.setName(name);
-            currentStudent.setAddress(address);
-            currentStudent.setEmail(email);
-            currentStudent.setPassword(password);
-            currentStudent.setPhone(phone);
-            studentViewModel.updateStudent(currentStudent);
+        if (validateInput()) {
+            if (currentStudent != null) {
+                currentStudent.setStudentID(currentStudent.getStudentID());
+                currentStudent.setName(name);
+                currentStudent.setAddress(address);
+                currentStudent.setEmail(email);
+                currentStudent.setPassword(password);
+                currentStudent.setPhone(phone);
+                studentViewModel.updateStudent(currentStudent);
+            }
+            else {
+                Student student = new Student(selectedGrade.getId(), name, address, email, password, phone);
+                long id = studentViewModel.insertStudent(student);
+                Log.i("student", "save: " +id + " " + student.toString());
+                Toast.makeText(this, "Student added successfully!", Toast.LENGTH_LONG).show();
+            }
             finish();
         }
-        else {
-            validateInput();
-            Student student = new Student(selectedGrade.getId(), name, address, email, password, phone);
-            long id = studentViewModel.insertStudent(student);
-            Log.i("fuck", "save: " +id + " " + student.toString());
-            Toast.makeText(this, "Student added successfully!", Toast.LENGTH_LONG).show();
-            finish();
-        }
+
     }
 
     private void setSpinners() {
@@ -132,30 +131,33 @@ public class StudentDetailsActivity extends AppCompatActivity {
         });
     }
 
-    private void validateInput() {
+    private boolean validateInput() {
         if (txtName.getText().toString().equals("")) {
             txtName.setError("Please enter instructor name");
-            return;
+            return false;
         }
         if (txtAddress.getText().toString().equals("")) {
             txtAddress.setError("Please enter instructor address");
-            return;
+            return false;
         }
         if (txtEmail.getText().toString().equals("")) {
             txtEmail.setError("Please enter instructor email");
-            return;
+            return false;
         }
         if (txtPassword.getText().toString().equals("")) {
             txtPassword.setError("Please enter instructor password");
-            return;
+            return false;
         }
         if (txtPhone.getText().toString().equals("")) {
             txtPhone.setError("Please enter instructor phone");
-            return;
+            return false;
         }
         if (spinnerGrade.getSelectedItemPosition() == 0) {
             Toast.makeText(this, "Please select a grade", Toast.LENGTH_LONG).show();
+            return false;
         }
+
+        return true;
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

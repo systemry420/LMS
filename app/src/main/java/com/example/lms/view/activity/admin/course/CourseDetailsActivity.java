@@ -72,43 +72,44 @@ public class CourseDetailsActivity extends AppCompatActivity {
         String name = txtName.getText().toString();
         String desc = txtDescription.getText().toString();
 
-        if (currentCourse != null) {
-            validateInput();
-            currentCourse.setInstructorID(currentCourse.getInstructorID());
-            currentCourse.setName(name);
-            currentCourse.setDescription(desc);
-            courseViewModel.updateCourse(currentCourse);
+        if (validateInput()) {
+            if (currentCourse != null) {
+                currentCourse.setInstructorID(currentCourse.getInstructorID());
+                currentCourse.setName(name);
+                currentCourse.setDescription(desc);
+                courseViewModel.updateCourse(currentCourse);
+            }
+            else {
+                Course course = new Course(0, 0, name, desc);
+                long id = courseViewModel.insertCourse(course);
+                Toast.makeText(this, "Course added successfully!", Toast.LENGTH_LONG).show();
+            }
+            finish();
         }
-        else {
-            validateInput();
-            Course course = new Course(0, 0, name, desc);
-            long id = courseViewModel.insertCourse(course);
-            Toast.makeText(this, "Course added successfully!", Toast.LENGTH_LONG).show();
-        }
-        finish();
 
     }
 
-    public void validateInput() {
+    public boolean validateInput() {
         String name = txtName.getText().toString();
         String desc = txtDescription.getText().toString();
 
         if (name.equals("")) {
             txtName.setError("Please enter course name");
-            return;
+            return false;
         }
         if (desc.equals("")) {
             txtDescription.setError("Please enter course description");
-            return;
+            return false;
         }
         if (spinnerInstructor.getSelectedItemId() == 0) {
             Toast.makeText(this, "Please select an instructor", Toast.LENGTH_LONG).show();
-            return;
+            return false;
         }
         if(spinnerGrade.getSelectedItemId() == 0) {
             Toast.makeText(this, "Please select a grade", Toast.LENGTH_LONG).show();
-            return;
+            return false;
         }
+        return true;
     }
 
     private void setSpinners() {

@@ -72,23 +72,22 @@ public class InstructorDetailsActivity extends AppCompatActivity {
         password = txtPassword.getText().toString();
         phone = txtPhone.getText().toString();
 
-        if (currentInstructor != null) {
-            validateInput();
-            currentInstructor.setInstructorID(currentInstructor.getInstructorID());
-            currentInstructor.setName(name);
-            currentInstructor.setAddress(address);
-            currentInstructor.setEmail(email);
-            currentInstructor.setPassword(password);
-            currentInstructor.setPhone(phone);
-            instructorViewModel.updateInstructor(currentInstructor);
-            finish();
-        }
-        else {
-            validateInput();
-            Instructor instructor = new Instructor(gradeID.getId(), name, address, phone, email, password);
-            long id = instructorViewModel.insertInstructor(instructor);
-            Log.i(TAG, "saveInstructor: " + id + " " + instructor.toString());
-            Toast.makeText(this, "Instructor added successfully!", Toast.LENGTH_LONG).show();
+        if (validateInput()) {
+            if (currentInstructor != null) {
+                currentInstructor.setInstructorID(currentInstructor.getInstructorID());
+                currentInstructor.setName(name);
+                currentInstructor.setAddress(address);
+                currentInstructor.setEmail(email);
+                currentInstructor.setPassword(password);
+                currentInstructor.setPhone(phone);
+                instructorViewModel.updateInstructor(currentInstructor);
+            }
+            else {
+                Instructor instructor = new Instructor(gradeID.getId(), name, address, phone, email, password);
+                long id = instructorViewModel.insertInstructor(instructor);
+                Log.i(TAG, "saveInstructor: " + id + " " + instructor.toString());
+                Toast.makeText(this, "Instructor added successfully!", Toast.LENGTH_LONG).show();
+            }
             finish();
         }
     }
@@ -148,30 +147,33 @@ public class InstructorDetailsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void validateInput() {
+    private boolean validateInput() {
         if (txtName.getText().toString().equals("")) {
             txtName.setError("Please enter instructor name");
-            return;
+            return false;
         }
         if (txtAddress.getText().toString().equals("")) {
             txtAddress.setError("Please enter instructor address");
-            return;
+            return false;
         }
         if (txtEmail.getText().toString().equals("")) {
             txtEmail.setError("Please enter instructor email");
-            return;
+            return false;
         }
         if (txtPassword.getText().toString().equals("")) {
             txtPassword.setError("Please enter instructor password");
-            return;
+            return false;
         }
         if (txtPhone.getText().toString().equals("")) {
             txtPhone.setError("Please enter instructor phone");
-            return;
+            return false;
         }
         if (spinnerGrade.getSelectedItemPosition() == 0) {
             Toast.makeText(this, "Please select a grade", Toast.LENGTH_LONG).show();
+            return false;
         }
+
+        return true;
     }
 
 }
