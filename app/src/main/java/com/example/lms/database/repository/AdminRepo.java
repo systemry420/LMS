@@ -15,6 +15,8 @@ import com.example.lms.model.Grade;
 import com.example.lms.model.Instructor;
 import com.example.lms.model.Lecture;
 import com.example.lms.model.Student;
+import com.example.lms.model.relations.CourseWithStudents;
+import com.example.lms.model.relations.StudentWithCourses;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -58,6 +60,14 @@ public class AdminRepo {
 
     public LiveData<List<Student>> getAllStudents() {
         return allStudents;
+    }
+
+    public LiveData<List<StudentWithCourses>> getCoursesOfStudent(long studentID) {
+        return studentDao.getCoursesOfStudent(studentID);
+    }
+
+    public LiveData<List<CourseWithStudents>> getStudentsOfCourse(long courseID) {
+        return courseDao.getCourseWithStudents(courseID);
     }
 
     public long insertStudent(Student student) {

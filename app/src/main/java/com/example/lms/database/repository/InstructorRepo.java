@@ -59,6 +59,10 @@ public class InstructorRepo {
         return lectureDao.getLecturesOfCourse(courseID);
     }
 
+    public LiveData<List<Exam>> getExamsOfCourse(long courseID) {
+        return examDao.getExamsOfCourse(courseID);
+    }
+
     public LiveData<List<Exam>> getAllExams() {
         return allExams;
     }
@@ -96,6 +100,18 @@ public class InstructorRepo {
     public void deleteLecture(Lecture lecture) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
             lectureDao.deleteLecture(lecture);
+        });
+    }
+
+    public void updateExam(Exam exam) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            examDao.updateExam(exam);
+        });
+    }
+
+    public void deleteExam(Exam exam) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            examDao.deleteExam(exam);
         });
     }
 

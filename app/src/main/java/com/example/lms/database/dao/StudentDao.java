@@ -5,9 +5,12 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 
 import com.example.lms.model.Student;
+import com.example.lms.model.relations.CourseWithStudents;
+import com.example.lms.model.relations.StudentWithCourses;
 
 import java.util.List;
 
@@ -24,5 +27,10 @@ public abstract class StudentDao {
 
     @Query("SELECT * FROM students")
     public abstract LiveData<List<Student>> getAllStudents();
+
+    @Transaction
+    @Query("select * from students where student_id = :studentID")
+    public abstract LiveData<List<StudentWithCourses>> getCoursesOfStudent(long studentID);
+
 
 }

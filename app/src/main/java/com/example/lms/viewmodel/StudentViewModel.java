@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.lms.database.repository.AdminRepo;
 import com.example.lms.model.Student;
+import com.example.lms.model.relations.StudentWithCourses;
 
 import java.util.List;
 
@@ -22,6 +23,10 @@ public class StudentViewModel extends AndroidViewModel {
 
     public LiveData<List<Student>> getAllStudents() {
         return allStudents;
+    }
+
+    public LiveData<List<StudentWithCourses>> getCoursesOfStudent(long studentID) {
+        return adminRepo.getCoursesOfStudent(studentID);
     }
 
     public long insertStudent(Student Student) {

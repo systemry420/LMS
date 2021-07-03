@@ -22,10 +22,10 @@ public abstract class LectureDao {
     @Delete
     public abstract void deleteLecture(Lecture lecture);
 
-    @Query("SELECT * FROM lectures")
+    @Query("SELECT * FROM lectures ")
     public abstract LiveData<List<Lecture>> getAllLectures();
 
-    @Query("SELECT * FROM lectures where course_id = :courseID")
+    @Query("SELECT * FROM lectures where course_id = :courseID order by lecture_id")
     public abstract LiveData<List<Lecture>> getLecturesOfCourse(long courseID);
 
 }

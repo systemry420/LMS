@@ -33,7 +33,7 @@ import java.util.concurrent.Executors;
         Student.class,
         Lecture.class,
         Exam.class,
-        Question.class}, version = 8, exportSchema = false)
+        Question.class}, version = 9, exportSchema = false)
 @TypeConverters(DateConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase INSTANCE;
@@ -56,7 +56,7 @@ public abstract class AppDatabase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(
                             context.getApplicationContext(),
                             AppDatabase.class,
-                            "a7"
+                            "a8"
                     ).fallbackToDestructiveMigration()
                     .build();
                 }

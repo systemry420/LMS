@@ -40,5 +40,15 @@ public class ExamViewModel extends AndroidViewModel {
         return instructorRepo.insertExam(exam);
     }
 
+    public LiveData<List<Exam>> getExamsOfCourse(long courseID) {
+        return instructorRepo.getExamsOfCourse(courseID);
+    }
 
+    public void updateExam(Exam exam) {
+        instructorRepo.updateExam(exam);
+    }
+
+    public void deleteExam(Exam exam) {
+        instructorRepo.deleteExam(exam);
+    }
 }

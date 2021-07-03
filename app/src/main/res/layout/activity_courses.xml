@@ -6,8 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".view.activity.admin.course.CoursesActivity">
 
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="@dimen/marginRight"
+        android:id="@+id/spinner_admin_courses" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
+        android:layout_below="@id/spinner_admin_courses"
         android:layout_height="match_parent"
         tools:listitem="@layout/list_item"
         android:paddingTop="8dp"

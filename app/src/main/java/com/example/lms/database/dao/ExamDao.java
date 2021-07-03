@@ -26,5 +26,6 @@ public abstract class ExamDao {
     @Query("SELECT * FROM exams")
     public abstract LiveData<List<Exam>> getAllExams();
 
-
+    @Query("SELECT * FROM exams where course_id = :courseID order by course_id")
+    public abstract LiveData<List<Exam>> getExamsOfCourse(long courseID);
 }

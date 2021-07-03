@@ -40,7 +40,6 @@ public class AddLectureActivity extends AppCompatActivity {
     private Spinner spinnerGrade, spinnerCourse;
     private GradeViewModel gradeViewModel;
     private CourseViewModel courseViewModel;
-    private List<SpinnerItem> gradesList, coursesList;
     private SpinnerItem selectedGrade, selectedCourse;
     private LecturesAdapter adapter;
 
@@ -49,8 +48,7 @@ public class AddLectureActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_lecture);
 
-        gradesList = new ArrayList<>();
-        coursesList = new ArrayList<>();
+
 
         spinnerGrade = findViewById(R.id.spinner_grade_lecture);
         spinnerCourse = findViewById(R.id.spinner_course_lecture);
@@ -107,24 +105,14 @@ public class AddLectureActivity extends AppCompatActivity {
             }).show();
     }
 
-
-    private void fetchLecturesOfGrade(SpinnerItem selectedGrade) {
-        lectureViewModel.getLecturesOfCourse(selectedCourse.getId()).observe(this, new Observer<List<Lecture>>() {
-            @Override
-            public void onChanged(List<Lecture> lectures) {
-                adapter.submitList(lectures);
-            }
-        });
-    }
-
     private void populateGradeSpinner() {
+        final List<SpinnerItem> gradesList = new ArrayList<>();
         ArrayAdapter<SpinnerItem> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, gradesList);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGrade.setAdapter(arrayAdapter);
         gradeViewModel.getAllGrades().observe(this, new Observer<List<Grade>>() {
             @Override
             public void onChanged(List<Grade> grades) {
-                gradesList.add(new SpinnerItem((long) 0, "Please select a grade"));
                 for (Grade grade : grades) {
                     gradesList.add(new SpinnerItem(grade.getGradeID(), grade.getGradeName()));
                 }
@@ -147,13 +135,14 @@ public class AddLectureActivity extends AppCompatActivity {
     }
 
     private void populateCourseSpinner(long gradeID) {
+        List<SpinnerItem> coursesList = new ArrayList<>();
+
         ArrayAdapter<SpinnerItem> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, coursesList);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCourse.setAdapter(arrayAdapter);
         courseViewModel.getCourseOfGrade(gradeID).observe(this, new Observer<List<Course>>() {
             @Override
             public void onChanged(List<Course> courses) {
-                coursesList.add(new SpinnerItem((long) 0, "Please select a course"));
                 for (Course course : courses) {
                     coursesList.add(new SpinnerItem(course.getCourseID(), course.getName() ));
                 }
@@ -161,12 +150,12 @@ public class AddLectureActivity extends AppCompatActivity {
             }
         });
 
-        spinnerGrade.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerCourse.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectedGrade = (SpinnerItem) parent.getItemAtPosition(position);
+                selectedCourse = (SpinnerItem) parent.getItemAtPosition(position);
 
-                fetchLecturesOfGrade(selectedGrade);
+                fetchLecturesOfGrade(selectedCourse);
             }
 
             @Override
@@ -176,6 +165,14 @@ public class AddLectureActivity extends AppCompatActivity {
         });
     }
 
+    private void fetchLecturesOfGrade(SpinnerItem selectedCourse) {
+        lectureViewModel.getLecturesOfCourse(selectedCourse.getId()).observe(this, new Observer<List<Lecture>>() {
+            @Override
+            public void onChanged(List<Lecture> lectures) {
+                adapter.submitList(lectures);
+            }
+        });
+    }
 
 
 
