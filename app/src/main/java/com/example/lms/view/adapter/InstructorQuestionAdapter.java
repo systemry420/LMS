@@ -52,7 +52,7 @@ public class InstructorQuestionAdapter extends ListAdapter<Question, InstructorQ
         private final TextView textView;
         public QuestionsViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.item_title);
+            textView = itemView.findViewById(R.id.user_name);
         }
     }
 

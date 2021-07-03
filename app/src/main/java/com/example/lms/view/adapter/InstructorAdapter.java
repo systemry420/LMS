@@ -71,8 +71,8 @@ public class InstructorAdapter extends ListAdapter<Instructor, InstructorAdapter
         private final ImageButton deleteIcon;
         public InstructorViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.item_title);
-            deleteIcon = itemView.findViewById(R.id.icon_delete_instructor);
+            textView = itemView.findViewById(R.id.user_name);
+            deleteIcon = itemView.findViewById(R.id.icon_delete_user);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -93,8 +93,6 @@ public class InstructorAdapter extends ListAdapter<Instructor, InstructorAdapter
                     }
                 }
             });
-
-
         }
     }
 

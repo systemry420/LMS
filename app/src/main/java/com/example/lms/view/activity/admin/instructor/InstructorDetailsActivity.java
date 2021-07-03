@@ -81,6 +81,7 @@ public class InstructorDetailsActivity extends AppCompatActivity {
             currentInstructor.setPassword(password);
             currentInstructor.setPhone(phone);
             instructorViewModel.updateInstructor(currentInstructor);
+            finish();
         }
         else {
             validateInput();
@@ -88,8 +89,8 @@ public class InstructorDetailsActivity extends AppCompatActivity {
             long id = instructorViewModel.insertInstructor(instructor);
             Log.i(TAG, "saveInstructor: " + id + " " + instructor.toString());
             Toast.makeText(this, "Instructor added successfully!", Toast.LENGTH_LONG).show();
+            finish();
         }
-        finish();
     }
 
     private void populateGradeSpinner() {

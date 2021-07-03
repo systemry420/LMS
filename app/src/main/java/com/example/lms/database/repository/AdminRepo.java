@@ -126,4 +126,16 @@ public class AdminRepo {
         });
     }
 
+    public void deleteStudent(Student student) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            studentDao.deleteStudent(student);
+        });
+    }
+
+    public void updateStudent(Student student) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            studentDao.updateStudent(student);
+        });
+    }
+
 }

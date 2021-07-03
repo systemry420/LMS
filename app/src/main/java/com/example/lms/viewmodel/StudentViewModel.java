@@ -28,5 +28,12 @@ public class StudentViewModel extends AndroidViewModel {
         return adminRepo.insertStudent(Student);
     }
 
+    public void updateStudent(Student student) {
+        adminRepo.updateStudent(student);
+    }
+
+    public void deleteStudent(Student student) {
+        adminRepo.deleteStudent(student);
+    }
 
 }

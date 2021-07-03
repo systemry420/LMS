@@ -22,7 +22,7 @@ public abstract class GradeDao {
     @Delete
     public abstract void deleteGrade(Grade gradeModel);
 
-    @Query("SELECT * FROM grades")
+    @Query("SELECT * FROM grades ORDER BY g_name")
     public abstract LiveData<List<Grade>> getAllGrades();
 
 }

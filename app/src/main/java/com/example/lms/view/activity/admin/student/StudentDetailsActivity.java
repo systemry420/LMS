@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -16,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.lms.R;
+import com.example.lms.model.Instructor;
 import com.example.lms.util.SpinnerItem;
 import com.example.lms.model.Grade;
 import com.example.lms.model.Student;
@@ -27,12 +29,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentDetailsActivity extends AppCompatActivity {
-    TextInputEditText txtName, txtAddress, txtEmail, txtPassword, txtPhone;
-    Spinner spinnerGrade;
-    StudentViewModel studentViewModel;
-    GradeViewModel gradeViewModel;
-    List<SpinnerItem> gradesList;
-    SpinnerItem selectedGrade;
+    private TextInputEditText txtName, txtAddress, txtEmail, txtPassword, txtPhone;
+    private Spinner spinnerGrade;
+    private StudentViewModel studentViewModel;
+    private GradeViewModel gradeViewModel;
+    private List<SpinnerItem> gradesList;
+    private SpinnerItem selectedGrade;
+    private Student currentStudent;
+    private String name, address, email, password, phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,55 @@ public class StudentDetailsActivity extends AppCompatActivity {
         studentViewModel = new ViewModelProvider(this).get(StudentViewModel.class);
 
         gradeViewModel = new ViewModelProvider(this).get(GradeViewModel.class);
+
+        setSpinners();
+
+        checkIntent();
+
+    }
+
+
+    private void checkIntent() {
+        Intent intent = getIntent();
+        currentStudent = (Student) intent.getSerializableExtra("student");
+        if (currentStudent != null) {
+            txtName.setText(currentStudent.getName());
+            txtPhone.setText(currentStudent.getPhone());
+            txtEmail.setText(currentStudent.getEmail());
+            txtPassword.setText(currentStudent.getPassword());
+            txtAddress.setText(currentStudent.getAddress());
+        }
+    }
+
+    private void saveInstructor() {
+        name = txtName.getText().toString();
+        address = txtAddress.getText().toString();
+        email = txtEmail.getText().toString();
+        password = txtPassword.getText().toString();
+        phone = txtPhone.getText().toString();
+
+        if (currentStudent != null) {
+            validateInput();
+            currentStudent.setStudentID(currentStudent.getStudentID());
+            currentStudent.setName(name);
+            currentStudent.setAddress(address);
+            currentStudent.setEmail(email);
+            currentStudent.setPassword(password);
+            currentStudent.setPhone(phone);
+            studentViewModel.updateStudent(currentStudent);
+            finish();
+        }
+        else {
+            validateInput();
+            Student student = new Student(selectedGrade.getId(), name, address, email, password, phone);
+            long id = studentViewModel.insertStudent(student);
+            Log.i("fuck", "save: " +id + " " + student.toString());
+            Toast.makeText(this, "Student added successfully!", Toast.LENGTH_LONG).show();
+            finish();
+        }
+    }
+
+    private void setSpinners() {
         ArrayAdapter<SpinnerItem> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, gradesList);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGrade.setAdapter(arrayAdapter);
@@ -77,7 +130,32 @@ public class StudentDetailsActivity extends AppCompatActivity {
 
             }
         });
+    }
 
+    private void validateInput() {
+        if (txtName.getText().toString().equals("")) {
+            txtName.setError("Please enter instructor name");
+            return;
+        }
+        if (txtAddress.getText().toString().equals("")) {
+            txtAddress.setError("Please enter instructor address");
+            return;
+        }
+        if (txtEmail.getText().toString().equals("")) {
+            txtEmail.setError("Please enter instructor email");
+            return;
+        }
+        if (txtPassword.getText().toString().equals("")) {
+            txtPassword.setError("Please enter instructor password");
+            return;
+        }
+        if (txtPhone.getText().toString().equals("")) {
+            txtPhone.setError("Please enter instructor phone");
+            return;
+        }
+        if (spinnerGrade.getSelectedItemPosition() == 0) {
+            Toast.makeText(this, "Please select a grade", Toast.LENGTH_LONG).show();
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -95,41 +173,5 @@ public class StudentDetailsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void saveInstructor() {
-        String name = txtName.getText().toString();
-        String address = txtAddress.getText().toString();
-        String phone = txtPhone.getText().toString();
-        String email = txtEmail.getText().toString();
-        String password = txtPassword.getText().toString();
-        if (name.equals("")) {
-            txtName.setError("Please enter student name");
-            return;
-        }
-        if (address.equals("")) {
-            txtAddress.setError("Please enter student address");
-            return;
-        }
-        if (phone.equals("")) {
-            txtPhone.setError("Please enter student phone");
-            return;
-        }
-        if (email.equals("")) {
-            txtEmail.setError("Please enter student email");
-            return;
-        }
-        if (password.equals("")) {
-            txtPassword.setError("Please enter student password");
-            return;
-        }
-        if(spinnerGrade.getSelectedItemId() == 0) {
-            Toast.makeText(this, "Please select a grade", Toast.LENGTH_LONG).show();
-            return;
-        }
 
-        Student student = new Student(selectedGrade.getId(), name, address, email, password, phone);
-        long id = studentViewModel.insertStudent(student);
-        Log.i("fuck", "saveInstructor: " +id + " " + student.toString());
-        Toast.makeText(this, "Student added successfully!", Toast.LENGTH_LONG).show();
-        finish();
-    }
 }
