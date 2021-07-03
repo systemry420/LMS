@@ -17,12 +17,12 @@
     <Spinner
         android:id="@+id/spinner_course_add_lecture"
         android:layout_width="match_parent"
-        style="@style/textInputStyle"
+        style="@style/textInputLayoutStyle"
         android:layout_height="60dp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:hint="@string/lecture_title"
-        style="@style/textInputStyle">
+        style="@style/textInputLayoutStyle">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txt_lecture_title"
@@ -33,7 +33,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:hint="@string/lecture_link"
-        style="@style/textInputStyle">
+        style="@style/textInputLayoutStyle">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txt_lecture_link"

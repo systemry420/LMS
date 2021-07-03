@@ -24,19 +24,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp" />
             <Spinner
-                style="@style/textInputStyle"
+                style="@style/textInputLayoutStyle"
                 android:layout_height="60dp"
                 android:id="@+id/spinner_grade_id" />
 
             <Spinner
-                style="@style/textInputStyle"
+                style="@style/textInputLayoutStyle"
                 android:layout_height="60dp"
                 android:id="@+id/spinner_instructor_id" />
 
 
             <com.google.android.material.textfield.TextInputLayout
                 android:hint="@string/course_name"
-                style="@style/textInputStyle">
+                style="@style/textInputLayoutStyle">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txt_course_name"
@@ -47,7 +47,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:hint="@string/course_description"
-                style="@style/textInputStyle">
+                style="@style/textInputLayoutStyle">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txt_course_desc"

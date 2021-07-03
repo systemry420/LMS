@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -30,12 +31,13 @@ import java.util.List;
 
 public class CourseDetailsActivity extends AppCompatActivity {
     private static final String TAG = "CourseDetailsActivity";
-    TextInputEditText txtName, txtDescription;
-    Spinner spinnerGrade, spinnerInstructor;
-    GradeViewModel gradeViewModel; InstructorViewModel instructorViewModel;
-    List<SpinnerItem> gradesList, instructorList;
-    SpinnerItem gradeID, instructorID;
-
+    private TextInputEditText txtName, txtDescription;
+    private Spinner spinnerGrade, spinnerInstructor;
+    private GradeViewModel gradeViewModel; InstructorViewModel instructorViewModel;
+    private List<SpinnerItem> gradesList, instructorList;
+    private SpinnerItem gradeID, instructorID;
+    private ArrayAdapter<SpinnerItem> gradeAdapter, instructorAdapter;
+    private Course currentCourse;
 
     CourseViewModel courseViewModel;
     @Override
@@ -52,15 +54,74 @@ public class CourseDetailsActivity extends AppCompatActivity {
         gradeViewModel = new ViewModelProvider(this).get(GradeViewModel.class);
         instructorViewModel = new ViewModelProvider(this).get(InstructorViewModel.class);
 
+        setSpinners();
+
+        checkIntent();
+    }
+
+    private void checkIntent() {
+        Intent intent = getIntent();
+        currentCourse = (Course) intent.getSerializableExtra("course");
+        if (currentCourse != null) {
+            txtName.setText(currentCourse.getName());
+            txtDescription.setText(currentCourse.getDescription());
+        }
+    }
+
+    private void saveCourse() {
+        String name = txtName.getText().toString();
+        String desc = txtDescription.getText().toString();
+
+        if (currentCourse != null) {
+            validateInput();
+            currentCourse.setInstructorID(currentCourse.getInstructorID());
+            currentCourse.setName(name);
+            currentCourse.setDescription(desc);
+            courseViewModel.updateCourse(currentCourse);
+        }
+        else {
+            validateInput();
+            Course course = new Course(0, 0, name, desc);
+            long id = courseViewModel.insertCourse(course);
+            Toast.makeText(this, "Course added successfully!", Toast.LENGTH_LONG).show();
+        }
+        finish();
+
+    }
+
+    public void validateInput() {
+        String name = txtName.getText().toString();
+        String desc = txtDescription.getText().toString();
+
+        if (name.equals("")) {
+            txtName.setError("Please enter course name");
+            return;
+        }
+        if (desc.equals("")) {
+            txtDescription.setError("Please enter course description");
+            return;
+        }
+        if (spinnerInstructor.getSelectedItemId() == 0) {
+            Toast.makeText(this, "Please select an instructor", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(spinnerGrade.getSelectedItemId() == 0) {
+            Toast.makeText(this, "Please select a grade", Toast.LENGTH_LONG).show();
+            return;
+        }
+    }
+
+    private void setSpinners() {
         gradesList = new ArrayList<>();
         instructorList = new ArrayList<>();
 
-        ArrayAdapter<SpinnerItem> gradeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, gradesList);
-        ArrayAdapter<SpinnerItem> instructorAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, instructorList);
+        gradeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, gradesList);
+        instructorAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, instructorList);
         gradeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         instructorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGrade.setAdapter(gradeAdapter);
         spinnerInstructor.setAdapter(instructorAdapter);
+
 
         gradeViewModel.getAllGrades().observe(this, new Observer<List<Grade>>() {
             @Override
@@ -109,7 +170,6 @@ public class CourseDetailsActivity extends AppCompatActivity {
 
             }
         });
-
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -121,37 +181,9 @@ public class CourseDetailsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.save:
-                saveInstructor();
+                saveCourse();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
-
-    private void saveInstructor() {
-        String name = txtName.getText().toString();
-        String desc = txtDescription.getText().toString();
-
-        if (name.equals("")) {
-            txtName.setError("Please enter course name");
-            return;
-        }
-        if (desc.equals("")) {
-            txtDescription.setError("Please enter course description");
-            return;
-        }
-        if (spinnerInstructor.getSelectedItemId() == 0) {
-            Toast.makeText(this, "Please select an instructor", Toast.LENGTH_LONG).show();
-            return;
-        }
-        if(spinnerGrade.getSelectedItemId() == 0) {
-            Toast.makeText(this, "Please select a grade", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        Course course = new Course(0, 0, name, desc);
-        long id = courseViewModel.insertCourse(course);
-        Toast.makeText(this, "Course added successfully!", Toast.LENGTH_LONG).show();
-        finish();
-    }
-
 }

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    </style>
+
     <style name="cardStyle">
         <item name="android:layout_marginTop">@dimen/marginTop</item>
         <item name="android:layout_marginBottom">@dimen/marginBottom</item>
@@ -18,7 +21,7 @@
         <item name="android:layout_gravity">center</item>
     </style>
 
-    <style name="textInputStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <style name="textInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_marginTop">@dimen/marginTop</item>
@@ -46,5 +49,12 @@
         <item name="android:layout_margin">@dimen/marginTop</item>
         <item name="textAppearanceBody1">@style/TextAppearance.AppCompat.Large</item>
         <item name="android:textColor">@color/error</item>
+    </style>
+
+    <style name="roundedImage" parent="">
+        <item name="backgroundTint">@color/white</item>
+        <item name="background">@color/white</item>
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
     </style>
 </resources>

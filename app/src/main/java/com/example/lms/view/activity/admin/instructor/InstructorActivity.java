@@ -66,7 +66,7 @@ public class InstructorActivity extends AppCompatActivity {
 
     private void deleteCurrentInstructor(Instructor instructor) {
         alertDialog
-            .setTitle("Delete")
+            .setTitle("Delete instructor")
             .setMessage("Are you sure you want to delete this instructor?")
             .setCancelable(false)
             .setPositiveButton("Yes", (dialog, which) -> {

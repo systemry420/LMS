@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lms.R;
 import com.example.lms.model.Instructor;
-import com.example.lms.model.Instructor;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -57,7 +56,7 @@ public class InstructorAdapter extends ListAdapter<Instructor, InstructorAdapter
     @Override
     public InstructorViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.instructor_list_item, parent, false);
+                .inflate(R.layout.user_list_item, parent, false);
         return new InstructorViewHolder(itemView);
     }
 

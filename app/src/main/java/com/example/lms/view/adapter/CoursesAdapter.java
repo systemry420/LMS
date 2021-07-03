@@ -3,6 +3,7 @@ package com.example.lms.view.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,10 +13,29 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lms.R;
 import com.example.lms.model.Course;
+import com.example.lms.model.Grade;
 
 import org.jetbrains.annotations.NotNull;
 
 public class CoursesAdapter extends ListAdapter<Course, CoursesAdapter.CoursesViewHolder> {
+    public interface OnCourseClickListener {
+        void onClickCourse(Course course);
+    }
+
+    public interface OnDeleteCourseClickListener {
+        void onDeleteCourse(Course course);
+    }
+
+    private OnCourseClickListener listener;
+    private OnDeleteCourseClickListener deleteListener;
+
+    public void setOnItemClickListener(OnCourseClickListener listener) {
+        this.listener = listener;
+    }
+
+    public void setOnDeleteListener(OnDeleteCourseClickListener listener) {
+        this.deleteListener = listener;
+    }
 
     public CoursesAdapter() {
         super(DIFF_CALLBACK);
@@ -48,11 +68,33 @@ public class CoursesAdapter extends ListAdapter<Course, CoursesAdapter.CoursesVi
         holder.textView.setText(currentCourse.getName());
     }
 
-    static class CoursesViewHolder extends RecyclerView.ViewHolder {
+    class CoursesViewHolder extends RecyclerView.ViewHolder {
         private final TextView textView;
+        private final ImageView deleteIcon;
         public CoursesViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.item_title);
+            deleteIcon = itemView.findViewById(R.id.icon_delete_item);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if(listener != null && position != RecyclerView.NO_POSITION) {
+                        listener.onClickCourse(getItem(position));
+                    }
+                }
+            });
+
+            deleteIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if(listener != null && position != RecyclerView.NO_POSITION) {
+                        deleteListener.onDeleteCourse(getItem(position));
+                    }
+                }
+            });
         }
     }
 

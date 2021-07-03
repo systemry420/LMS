@@ -78,7 +78,7 @@ public class GradesActivity extends AppCompatActivity {
 
     private void deleteGrade(Grade grade) {
         alertDialog
-                .setTitle("Delete")
+                .setTitle("Delete grade")
                 .setMessage("Are you sure you want to delete this grade?")
                 .setCancelable(false)
                 .setPositiveButton("Yes", (dialog, which) -> {

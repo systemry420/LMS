@@ -10,7 +10,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:hint="@string/grade_name"
         app:errorEnabled="true"
-        style="@style/textInputStyle">
+        style="@style/textInputLayoutStyle">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txt_grade_name"
@@ -21,7 +21,7 @@
     <Button
         android:id="@+id/btn_add_grade"
         android:text="@string/add_grade"
-        style="@style/textInputStyle" />
+        style="@style/textInputLayoutStyle" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

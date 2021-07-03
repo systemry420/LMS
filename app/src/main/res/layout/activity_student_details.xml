@@ -19,14 +19,20 @@
             android:paddingBottom="100dp"
             android:orientation="vertical">
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:src="@drawable/man"
+                android:layout_margin="@dimen/marginRight"
+                android:layout_height="200dp" />
+
             <Spinner
-                style="@style/textInputStyle"
+                style="@style/textInputLayoutStyle"
                 android:padding="28dp"
                 android:id="@+id/spinner_student_grade" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:hint="@string/student_name"
-                style="@style/textInputStyle">
+                style="@style/textInputLayoutStyle">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txt_student_name"
                     android:layout_width="match_parent"
@@ -36,7 +42,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:hint="@string/student_address"
-                style="@style/textInputStyle">
+                style="@style/textInputLayoutStyle">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txt_student_address"
@@ -47,7 +53,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:hint="@string/student_email"
-                style="@style/textInputStyle">
+                style="@style/textInputLayoutStyle">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txt_student_email"
@@ -58,7 +64,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:hint="@string/student_password"
-                style="@style/textInputStyle">
+                style="@style/textInputLayoutStyle">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txt_student_password"
@@ -69,7 +75,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:hint="@string/student_phone"
-                style="@style/textInputStyle">
+                style="@style/textInputLayoutStyle">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txt_student_phone"
                     android:layout_width="match_parent"

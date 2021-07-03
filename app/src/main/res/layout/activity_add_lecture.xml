@@ -7,12 +7,12 @@
     tools:context=".view.activity.instructor.lecture.AddLectureActivity">
 
     <Spinner
-        style="@style/textInputStyle"
+        style="@style/textInputLayoutStyle"
         android:padding="28dp"
         android:id="@+id/spinner_grade_lecture" />
 
     <Spinner
-        style="@style/textInputStyle"
+        style="@style/textInputLayoutStyle"
         android:padding="28dp"
         android:layout_below="@id/spinner_grade_lecture"
         android:id="@+id/spinner_course_lecture" />

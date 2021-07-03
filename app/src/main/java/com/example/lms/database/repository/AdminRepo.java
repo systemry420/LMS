@@ -114,4 +114,16 @@ public class AdminRepo {
         });
     }
 
+    public void deleteCourse(Course course) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            courseDao.deleteCourse(course);
+        });
+    }
+
+    public void updateCourse(Course course) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            courseDao.updateCourse(course);
+        });
+    }
+
 }

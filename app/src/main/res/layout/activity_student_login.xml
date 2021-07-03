@@ -21,9 +21,10 @@
     <com.google.android.material.textfield.TextInputLayout
         android:hint="@string/email"
         app:errorEnabled="true"
-        style="@style/textInputStyle">
+        style="@style/textInputLayoutStyle">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txt_student_login_email"
+            android:background="#fff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -31,9 +32,10 @@
     <com.google.android.material.textfield.TextInputLayout
         android:hint="Password"
         app:errorEnabled="true"
-        style="@style/textInputStyle">
+        style="@style/textInputLayoutStyle">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txt_student_login_password"
+            android:background="#fff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>

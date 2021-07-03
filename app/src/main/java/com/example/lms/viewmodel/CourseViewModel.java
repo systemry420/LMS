@@ -28,4 +28,11 @@ public class CourseViewModel extends AndroidViewModel {
         return adminRepo.insertCourse(course);
     }
 
+    public void deleteCourse(Course course) {
+        adminRepo.deleteCourse(course);
+    }
+
+    public void updateCourse(Course course) {
+        adminRepo.updateCourse(course);
+    }
 }
