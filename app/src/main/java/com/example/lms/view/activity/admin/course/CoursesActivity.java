@@ -31,8 +31,8 @@ public class CoursesActivity extends AppCompatActivity {
     private CourseViewModel courseViewModel;
     private CoursesAdapter adapter;
     private AlertDialog.Builder alertDialog;
-    private Spinner spinnerGrade;
     private GradeViewModel gradeViewModel;
+    private Spinner spinnerGrade;
     private SpinnerItem selectedGrade;
     private List<SpinnerItem> gradesList;
 
@@ -95,9 +95,16 @@ public class CoursesActivity extends AppCompatActivity {
     }
 
     private void fetchCourses(Long id) {
-        courseViewModel.getCoursesOfGrade(id).observe(this, courses -> {
-            adapter.submitList(courses);
-        });
+        if(id == 0) {
+            courseViewModel.getCoursesOfGrade(id).observe(this, courses -> {
+                adapter.submitList(courses);
+            });
+        }
+        else {
+            courseViewModel.getCoursesOfGrade(id).observe(this, courses -> {
+                adapter.submitList(courses);
+            });
+        }
     }
 
 

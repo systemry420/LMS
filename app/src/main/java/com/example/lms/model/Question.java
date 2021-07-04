@@ -13,6 +13,8 @@ public class Question {
     @ColumnInfo(name = "exam_id")
     private long examID;
     @ColumnInfo
+    private String type;
+    @ColumnInfo
     private String title;
     @ColumnInfo
     private String answer;
@@ -25,6 +27,14 @@ public class Question {
 
     public Question() {
 
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getTitle() {

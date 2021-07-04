@@ -29,7 +29,7 @@
             <Spinner
                 style="@style/textInputLayoutStyle"
                 android:padding="28dp"
-                android:id="@+id/spinner_student_grade" />
+                android:id="@+id/spinner_student_details_grade" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:hint="@string/student_name"

@@ -3,5 +3,6 @@
     <string-array name="question_types" >
         <item>Multiple choices</item>
         <item>Question/Answer</item>
+        <item>True/False</item>
     </string-array>
 </resources>

@@ -6,6 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".view.activity.admin.student.StudentsActivity">
 
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="@dimen/marginRight"
+        android:id="@+id/spinner_student_grade" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

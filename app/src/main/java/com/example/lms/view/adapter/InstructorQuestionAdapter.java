@@ -45,14 +45,23 @@ public class InstructorQuestionAdapter extends ListAdapter<Question, InstructorQ
     @Override
     public void onBindViewHolder(@NonNull @NotNull QuestionsViewHolder holder, int position) {
         Question currentQuestion = getItem(position);
-        holder.textView.setText(currentQuestion.getTitle());
+        if (currentQuestion.getType().equals("mcq")) {
+            holder.textView.setText(
+                    currentQuestion.getTitle() + "\n" +
+                    currentQuestion.getOption1() + "\n" +
+                    currentQuestion.getOption2() + "\n" +
+                    currentQuestion.getOption3());
+        }
+        else {
+            holder.textView.setText(currentQuestion.getTitle());
+        }
     }
 
     static class QuestionsViewHolder extends RecyclerView.ViewHolder {
         private final TextView textView;
         public QuestionsViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.user_name);
+            textView = itemView.findViewById(R.id.item_title);
         }
     }
 

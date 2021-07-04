@@ -50,7 +50,7 @@ public class StudentDetailsActivity extends AppCompatActivity {
 
         gradesList = new ArrayList<>();
 
-        spinnerGrade = findViewById(R.id.spinner_student_grade);
+        spinnerGrade = findViewById(R.id.spinner_student_details_grade);
 
         studentViewModel = new ViewModelProvider(this).get(StudentViewModel.class);
 

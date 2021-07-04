@@ -124,10 +124,15 @@ public class ExamDetailsActivity extends AppCompatActivity {
                     mcqLayout.setVisibility(View.VISIBLE);
                     qaLayout.setVisibility(View.GONE);
                 }
-                else {
+                else if(position == 1) {
                     questionType = "qa";
-                    mcqLayout.setVisibility(View.GONE);
                     qaLayout.setVisibility(View.VISIBLE);
+                    mcqLayout.setVisibility(View.GONE);
+                }
+                else {
+                    questionType = "tf";
+                    qaLayout.setVisibility(View.VISIBLE);
+                    mcqLayout.setVisibility(View.GONE);
                 }
             }
 
@@ -198,11 +203,13 @@ public class ExamDetailsActivity extends AppCompatActivity {
 
     private void nextQuestion() {
         // todo clear input, add q type to each Q, add true/false
-        if (questionType.equals("qa")) {
+        if (questionType.equals("qa") || questionType.equals("tf")) {
             String title = txtQaQuestion.getText().toString();
-            Question questionAnswer = new Question();
-            questionAnswer.setTitle(title);
-            questionList.add(questionAnswer);
+            Question question = new Question();
+            question.setTitle(title);
+            question.setType(questionType);
+            questionList.add(question);
+            txtQaQuestion.setText("");
 
         }
         else  {
@@ -212,12 +219,18 @@ public class ExamDetailsActivity extends AppCompatActivity {
             String option3 = txtMcqOption3.getText().toString();
 
             Question questionMcq = new Question();
+            questionMcq.setType(questionType);
             questionMcq.setTitle(title);
             questionMcq.setOption1(option1);
             questionMcq.setOption2(option2);
             questionMcq.setOption3(option3);
 
             questionList.add(questionMcq);
+
+            txtMcqQuestion.setText("");
+            txtMcqOption1.setText("");
+            txtMcqOption2.setText("");
+            txtMcqOption3.setText("");
         }
 
         questionsAdapter.submitList(questionList);
