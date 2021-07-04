@@ -17,6 +17,7 @@ import java.util.List;
 
 @Dao
 public abstract class StudentDao {
+    @Transaction
     @Insert
     public abstract long insertStudent(Student student);
 
@@ -36,6 +37,9 @@ public abstract class StudentDao {
     @Transaction
     @Query("select * from students where student_id = :studentID")
     public abstract LiveData<List<StudentWithCourses>> getCoursesOfStudent(long studentID);
+
+    @Query("SELECT * FROM students WHERE student_id =:id")
+    public abstract Student getStudent(int id);
 
 
 }

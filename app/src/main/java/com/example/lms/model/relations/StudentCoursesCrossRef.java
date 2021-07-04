@@ -3,29 +3,38 @@ package com.example.lms.model.relations;
 import androidx.room.ColumnInfo;
 import androidx.room.Dao;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.Insert;
 import androidx.room.PrimaryKey;
 
 import com.example.lms.model.Course;
 import com.example.lms.model.Student;
 
-@Entity(tableName = "student_courses")
-public abstract class StudentCoursesCrossRef {
-
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "student_course_id")
-    private long studentCourseID;
+@Entity(tableName = "student_courses",
+        primaryKeys = {"student_id", "course_id"},
+        foreignKeys = {
+            @ForeignKey(entity = Student.class,
+            parentColumns = "student_id",
+            childColumns = "student_id",
+            onDelete = ForeignKey.CASCADE),
+            @ForeignKey(entity = Course.class,
+            parentColumns = "course_id",
+            childColumns = "course_id",
+            onDelete = ForeignKey.CASCADE)
+        }
+)
+public class StudentCoursesCrossRef {
     @ColumnInfo(name = "student_id", index = true)
     private long studentID;
     @ColumnInfo(name = "course_id", index = true)
     private long courseID;
 
-    public long getStudentCourseID() {
-        return studentCourseID;
+    public StudentCoursesCrossRef(long studentID, long courseID) {
+        this.studentID = studentID;
+        this.courseID = courseID;
     }
 
-    public void setStudentCourseID(long studentCourseID) {
-        this.studentCourseID = studentCourseID;
+    public StudentCoursesCrossRef() {
     }
 
     public long getStudentID() {
@@ -43,11 +52,4 @@ public abstract class StudentCoursesCrossRef {
     public void setCourseID(long courseID) {
         this.courseID = courseID;
     }
-
-    @Dao
-    public abstract static class StudentCoursesCrossRefDao {
-        @Insert
-        public abstract void insertCourseToStudent(Student student, Course course);
-    }
-
 }

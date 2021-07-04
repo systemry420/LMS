@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import com.example.lms.database.repository.AdminRepo;
 import com.example.lms.model.Course;
 import com.example.lms.model.Student;
+import com.example.lms.model.relations.StudentCoursesCrossRef;
 import com.example.lms.model.relations.StudentWithCourses;
 
 import java.util.List;
@@ -30,12 +31,12 @@ public class StudentViewModel extends AndroidViewModel {
         return adminRepo.getStudentsOfGrade(gradeID);
     }
 
-    public LiveData<List<StudentWithCourses>> getCoursesOfStudent(long studentID) {
+    public LiveData<List<Course>> getCoursesOfStudent(long studentID) {
         return adminRepo.getCoursesOfStudent(studentID);
     }
 
-    public void insertCourseToStudent(Student student, Course course) {
-        adminRepo.insertCourseToStudent(student, course);
+    public void insertCourseToStudent(StudentCoursesCrossRef join) {
+        adminRepo.insertCourseToStudent(join);
     }
 
     public long insertStudent(Student Student) {

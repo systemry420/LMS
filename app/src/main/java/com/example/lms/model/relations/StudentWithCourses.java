@@ -1,6 +1,7 @@
 package com.example.lms.model.relations;
 
 import androidx.room.Embedded;
+import androidx.room.Ignore;
 import androidx.room.Junction;
 import androidx.room.Relation;
 
@@ -17,5 +18,7 @@ public class StudentWithCourses {
             entityColumn = "course_id",
             associateBy = @Junction(StudentCoursesCrossRef.class)
     )
+
+    @Ignore
     public List<Course> courseList;
 }

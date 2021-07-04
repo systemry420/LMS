@@ -8,6 +8,7 @@ import com.example.lms.database.AppDatabase;
 import com.example.lms.database.dao.CourseDao;
 import com.example.lms.database.dao.GradeDao;
 import com.example.lms.database.dao.InstructorDao;
+import com.example.lms.database.dao.StudentCourseDao;
 import com.example.lms.database.dao.StudentDao;
 import com.example.lms.model.Course;
 import com.example.lms.model.Grade;
@@ -15,7 +16,6 @@ import com.example.lms.model.Instructor;
 import com.example.lms.model.Student;
 import com.example.lms.model.relations.CourseWithStudents;
 import com.example.lms.model.relations.StudentCoursesCrossRef;
-import com.example.lms.model.relations.StudentWithCourses;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -26,7 +26,7 @@ public class AdminRepo {
     private final InstructorDao instructorDao;
     private final CourseDao courseDao;
     private final StudentDao studentDao;
-    private final StudentCoursesCrossRef.StudentCoursesCrossRefDao studentCoursesCrossRefDao;
+    private final StudentCourseDao studentCourseDao;
     private final LiveData<List<Grade>> allGrades;
     private final LiveData<List<Instructor>> allInstructors;
     private final LiveData<List<Course>> allCourses;
@@ -38,7 +38,7 @@ public class AdminRepo {
         instructorDao = db.instructorDao();
         courseDao = db.courseDao();
         studentDao = db.studentDao();
-        studentCoursesCrossRefDao = db.studentCoursesCrossRefDao();
+        studentCourseDao = db.studentCoursesDao();
 
 
         allGrades = gradeDao.getAllGrades();
@@ -47,8 +47,8 @@ public class AdminRepo {
         allStudents = studentDao.getAllStudents();
     }
 
-    public void insertCourseToStudent(Student student, Course course) {
-        studentCoursesCrossRefDao.insertCourseToStudent(student, course);
+    public LiveData<List<Course>> getCoursesOfStudent(long studentID) {
+        return studentCourseDao.getCoursesWithStudentId(studentID);
     }
 
     public LiveData<Course> getCourse(long courseID) {
@@ -73,10 +73,6 @@ public class AdminRepo {
 
     public LiveData<List<Student>> getStudentsOfGrade(long gradeID) {
         return studentDao.getStudentsOfGrade(gradeID);
-    }
-
-    public LiveData<List<StudentWithCourses>> getCoursesOfStudent(long studentID) {
-        return studentDao.getCoursesOfStudent(studentID);
     }
 
     public LiveData<List<Course>> getCoursesOfGrade(long gradeID) {
@@ -162,6 +158,13 @@ public class AdminRepo {
     public void updateStudent(Student student) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
             studentDao.updateStudent(student);
+        });
+    }
+
+
+    public void insertCourseToStudent(StudentCoursesCrossRef join) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            studentCourseDao.insertStudentCoursesJoin(join);
         });
     }
 

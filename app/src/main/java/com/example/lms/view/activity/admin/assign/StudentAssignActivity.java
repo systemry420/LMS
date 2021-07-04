@@ -16,6 +16,7 @@ import com.example.lms.R;
 import com.example.lms.model.Course;
 import com.example.lms.model.Grade;
 import com.example.lms.model.Student;
+import com.example.lms.model.relations.StudentCoursesCrossRef;
 import com.example.lms.util.SpinnerItem;
 import com.example.lms.viewmodel.CourseViewModel;
 import com.example.lms.viewmodel.GradeViewModel;
@@ -70,9 +71,12 @@ public class StudentAssignActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<Course> courses) {
                 coursesList.add(new SpinnerItem((long) 0, "Please select a course"));
+
+                List<Course> studentCourses = studentViewModel.getCoursesOfStudent(currentStudent.getStudentID()).getValue();
                 for (Course course : courses) {
                     //todo filter courses of students
-                    coursesList.add(new SpinnerItem(course.getCourseID(), course.getName() ));
+                    if (!studentCourses.contains(course))
+                        coursesList.add(new SpinnerItem(course.getCourseID(), course.getName() ));
                 }
                 coursesAdapter.notifyDataSetChanged();
             }
@@ -105,7 +109,7 @@ public class StudentAssignActivity extends AppCompatActivity {
         chip.setTextAppearance(R.style.TextAppearance_AppCompat_Large);
         chipGroup.addView(chip);
 
-        Course course = courseViewModel.getCourse(selectedCourse.getId()).getValue();
-        studentViewModel.insertCourseToStudent(currentStudent, course);
+        StudentCoursesCrossRef join = new StudentCoursesCrossRef(currentStudent.getStudentID(), selectedCourse.getId());
+        studentViewModel.insertCourseToStudent(join);
     }
 }
