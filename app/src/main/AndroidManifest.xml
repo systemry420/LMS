@@ -9,31 +9,34 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LMS">
+        <activity android:name=".view.activity.admin.assign.InstructorAssignActivity"></activity>
+        <activity android:name=".view.activity.admin.assign.StudentAssignActivity" />
+        <activity android:name=".view.activity.admin.assign.AdminAssignStudentActivity" />
+        <activity android:name=".view.activity.admin.assign.AdminAssignInstructorActivity" />
+        <activity android:name=".view.activity.admin.assign.AdminAssignActivity" />
         <activity android:name=".view.activity.admin.AdminLoginActivity" />
         <activity android:name=".view.activity.instructor.InstructorLoginActivity" />
         <activity android:name=".view.activity.student.StudentExamActivity" />
         <activity android:name=".view.activity.student.StudentCourseLecturesActivity" />
         <activity
             android:name=".view.activity.student.StudentHomeActivity"
-            android:label="Student Home"/>
+            android:label="Student Home" />
         <activity android:name=".view.activity.student.StudentLoginActivity" />
         <activity android:name=".view.activity.instructor.evaluation.CorrectExamDetailsActivity" />
         <activity android:name=".view.activity.instructor.evaluation.CorrectExamActivity" />
         <activity android:name=".view.activity.instructor.exam.ExamDetailsActivity" />
         <activity
             android:name=".view.activity.instructor.exam.AddExamActivity"
-            android:label="Add Exam"/>
+            android:label="Add Exam" />
         <activity
             android:name=".view.activity.instructor.lecture.LectureDetailsActivity"
-            android:label="Lecture Details"/>
+            android:label="Lecture Details" />
         <activity
             android:name=".view.activity.instructor.lecture.AddLectureActivity"
-            android:label="Add Lecture"/>
+            android:label="Add Lecture" />
         <activity
             android:name=".view.activity.instructor.InstructorHomeActivity"
-            android:label="Instructor Home">
-
-        </activity>
+            android:label="Instructor Home" />
         <activity android:name=".view.activity.admin.student.StudentDetailsActivity" />
         <activity android:name=".view.activity.admin.student.StudentsActivity" />
         <activity android:name=".view.activity.admin.course.CourseDetailsActivity" />
@@ -42,7 +45,7 @@
         <activity android:name=".view.activity.admin.instructor.InstructorActivity" />
         <activity
             android:name=".view.activity.admin.AdminHomeActivity"
-            android:label="Admin Home"/>
+            android:label="Admin Home" />
         <activity android:name=".view.activity.admin.grade.GradesDetailsActivity" />
         <activity android:name=".view.activity.admin.grade.GradesActivity" />
         <activity android:name=".MainActivity">

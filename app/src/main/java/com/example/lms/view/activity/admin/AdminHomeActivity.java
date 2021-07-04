@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.lms.R;
+import com.example.lms.view.activity.admin.assign.AdminAssignActivity;
 import com.example.lms.view.activity.admin.course.CoursesActivity;
 import com.example.lms.view.activity.admin.grade.GradesActivity;
 import com.example.lms.view.activity.admin.instructor.InstructorActivity;
@@ -38,6 +39,11 @@ public class AdminHomeActivity extends AppCompatActivity {
                 break;
             case R.id.card_students:
                 intent = new Intent(this, StudentsActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.card_assigning:
+                intent = new Intent(this, AdminAssignActivity.class);
                 startActivity(intent);
                 break;
         }

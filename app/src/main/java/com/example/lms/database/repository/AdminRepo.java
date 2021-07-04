@@ -62,8 +62,16 @@ public class AdminRepo {
         return allStudents;
     }
 
+    public LiveData<List<Student>> getStudentsOfGrade(long gradeID) {
+        return studentDao.getStudentsOfGrade(gradeID);
+    }
+
     public LiveData<List<StudentWithCourses>> getCoursesOfStudent(long studentID) {
         return studentDao.getCoursesOfStudent(studentID);
+    }
+
+    public LiveData<List<Course>> getCoursesOfGrade(long gradeID) {
+        return courseDao.getCoursesOfGrade(gradeID);
     }
 
     public LiveData<List<CourseWithStudents>> getStudentsOfCourse(long courseID) {

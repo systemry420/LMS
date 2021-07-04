@@ -28,12 +28,6 @@
                 android:layout_height="60dp"
                 android:id="@+id/spinner_grade_id" />
 
-            <Spinner
-                style="@style/textInputLayoutStyle"
-                android:layout_height="60dp"
-                android:id="@+id/spinner_instructor_id" />
-
-
             <com.google.android.material.textfield.TextInputLayout
                 android:hint="@string/course_name"
                 style="@style/textInputLayoutStyle">

@@ -95,7 +95,7 @@ public class CoursesActivity extends AppCompatActivity {
     }
 
     private void fetchCourses(Long id) {
-        courseViewModel.getCourseOfGrade(id).observe(this, courses -> {
+        courseViewModel.getCoursesOfGrade(id).observe(this, courses -> {
             adapter.submitList(courses);
         });
     }

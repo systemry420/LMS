@@ -140,7 +140,7 @@ public class AddLectureActivity extends AppCompatActivity {
         ArrayAdapter<SpinnerItem> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, coursesList);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCourse.setAdapter(arrayAdapter);
-        courseViewModel.getCourseOfGrade(gradeID).observe(this, new Observer<List<Course>>() {
+        courseViewModel.getCoursesOfGrade(gradeID).observe(this, new Observer<List<Course>>() {
             @Override
             public void onChanged(List<Course> courses) {
                 for (Course course : courses) {

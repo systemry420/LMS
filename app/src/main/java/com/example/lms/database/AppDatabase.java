@@ -7,6 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
+import com.example.lms.model.relations.StudentCoursesCrossRef;
 import com.example.lms.util.DateConverter;
 import com.example.lms.database.dao.CourseDao;
 import com.example.lms.database.dao.ExamDao;
@@ -33,7 +34,8 @@ import java.util.concurrent.Executors;
         Student.class,
         Lecture.class,
         Exam.class,
-        Question.class}, version = 9, exportSchema = false)
+        Question.class,
+        StudentCoursesCrossRef.class}, version = 11, exportSchema = false)
 @TypeConverters(DateConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase INSTANCE;
@@ -56,7 +58,7 @@ public abstract class AppDatabase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(
                             context.getApplicationContext(),
                             AppDatabase.class,
-                            "a8"
+                            "a11"
                     ).fallbackToDestructiveMigration()
                     .build();
                 }

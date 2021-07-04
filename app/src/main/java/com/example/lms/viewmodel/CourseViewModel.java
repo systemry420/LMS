@@ -28,8 +28,8 @@ public class CourseViewModel extends AndroidViewModel {
         return allCourses;
     }
 
-    public LiveData<List<Course>> getCourseOfGrade(long gradeID) {
-        return instructorRepo.getCoursesOfGrade(gradeID);
+    public LiveData<List<Course>> getCoursesOfGrade(long gradeID) {
+        return adminRepo.getCoursesOfGrade(gradeID);
     }
 
     public LiveData<List<CourseWithStudents>> getStudentsOfCourse(long courseID) {

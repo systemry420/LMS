@@ -29,6 +29,10 @@ public abstract class StudentDao {
     public abstract LiveData<List<Student>> getAllStudents();
 
     @Transaction
+    @Query("select * from students where grade_id = :gradeID")
+    public abstract LiveData<List<Student>> getStudentsOfGrade(long gradeID);
+
+    @Transaction
     @Query("select * from students where student_id = :studentID")
     public abstract LiveData<List<StudentWithCourses>> getCoursesOfStudent(long studentID);
 

@@ -24,12 +24,6 @@
                 android:layout_margin="@dimen/marginRight"
                 android:layout_height="200dp" />
 
-            <Spinner
-                android:id="@+id/spinner_instructor_grade"
-                android:layout_width="match_parent"
-                style="@style/textInputLayoutStyle"
-                android:layout_height="60dp" />
-
             <com.google.android.material.textfield.TextInputLayout
                 android:hint="@string/instructor_name"
                 app:errorEnabled="true"

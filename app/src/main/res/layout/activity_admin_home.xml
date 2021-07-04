@@ -56,4 +56,17 @@
             style="@style/cardTextStyle"
             android:text="@string/students" />
     </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_assigning"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:onClick="openActivity"
+        style="@style/cardStyle">
+        <TextView
+            style="@style/cardTextStyle"
+            android:text="Assigning" />
+    </com.google.android.material.card.MaterialCardView>
+
 </LinearLayout>

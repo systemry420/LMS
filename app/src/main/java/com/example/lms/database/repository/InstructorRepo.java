@@ -48,7 +48,7 @@ public class InstructorRepo {
 
 
     public LiveData<List<Course>> getCoursesOfGrade(long gradeID) {
-        return courseDao.getCourseOfGrade(gradeID);
+        return courseDao.getCoursesOfGrade(gradeID);
     }
 
     public LiveData<List<Lecture>> getAllLectures() {

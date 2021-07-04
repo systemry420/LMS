@@ -26,6 +26,11 @@
                 android:visibility="gone"
                 android:layout_height="200dp" />
 
+            <Spinner
+                style="@style/textInputLayoutStyle"
+                android:padding="28dp"
+                android:id="@+id/spinner_student_grade" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:hint="@string/student_name"
                 style="@style/textInputLayoutStyle">
@@ -77,22 +82,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
             </com.google.android.material.textfield.TextInputLayout>
-
-
-            <Spinner
-                style="@style/textInputLayoutStyle"
-                android:padding="28dp"
-                android:id="@+id/spinner_student_grade" />
-
-            <Spinner
-                style="@style/textInputLayoutStyle"
-                android:padding="28dp"
-                android:id="@+id/spinner_student_course" />
-
-            <com.google.android.material.chip.ChipGroup
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/chip_courses" />
 
         </LinearLayout>
 

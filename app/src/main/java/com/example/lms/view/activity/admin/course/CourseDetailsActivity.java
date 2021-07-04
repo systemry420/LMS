@@ -48,7 +48,6 @@ public class CourseDetailsActivity extends AppCompatActivity {
         txtName = findViewById(R.id.txt_course_name);
         txtDescription = findViewById(R.id.txt_course_desc);
         spinnerGrade = findViewById(R.id.spinner_grade_id);
-        spinnerInstructor = findViewById(R.id.spinner_instructor_id);
 
         courseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);
         gradeViewModel = new ViewModelProvider(this).get(GradeViewModel.class);
@@ -135,18 +134,6 @@ public class CourseDetailsActivity extends AppCompatActivity {
             }
         });
 
-        instructorViewModel.getAllInstructors().observe(this, new Observer<List<Instructor>>() {
-            @Override
-            public void onChanged(List<Instructor> instructors) {
-                instructorList.add(new SpinnerItem((long)0, "Please select an instructor"));
-                for(Instructor instructor:instructors) {
-                    instructorList.add(new SpinnerItem(instructor.getInstructorID(), instructor.getName()));
-                }
-
-                instructorAdapter.notifyDataSetChanged();
-            }
-        });
-
         spinnerGrade.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -160,17 +147,6 @@ public class CourseDetailsActivity extends AppCompatActivity {
             }
         });
 
-        spinnerInstructor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                instructorID = (SpinnerItem) parent.getItemAtPosition(position);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -30,7 +30,7 @@ public abstract class CourseDao {
 
 
     @Query("SELECT * FROM courses where grade_id = :gradeID ")
-    public abstract LiveData<List<Course>> getCourseOfGrade(long gradeID);
+    public abstract LiveData<List<Course>> getCoursesOfGrade(long gradeID);
 
     @Transaction
     @Query("select * from courses where course_id = :courseID")

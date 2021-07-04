@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.activity.admin.assign.AdminAssignStudentActivity">
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="@dimen/marginRight"
+        android:id="@+id/spinner_admin_assign_student" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/user_list_item"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:id="@+id/assign_student_recycler_view" />
+
+
+</LinearLayout>
