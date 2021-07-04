@@ -8,6 +8,7 @@ import androidx.room.Query;
 import androidx.room.Transaction;
 import androidx.room.Update;
 
+import com.example.lms.model.Course;
 import com.example.lms.model.Student;
 import com.example.lms.model.relations.CourseWithStudents;
 import com.example.lms.model.relations.StudentWithCourses;

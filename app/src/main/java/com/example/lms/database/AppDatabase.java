@@ -35,7 +35,7 @@ import java.util.concurrent.Executors;
         Lecture.class,
         Exam.class,
         Question.class,
-        StudentCoursesCrossRef.class}, version = 11, exportSchema = false)
+        StudentCoursesCrossRef.class}, version = 13, exportSchema = false)
 @TypeConverters(DateConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase INSTANCE;
@@ -47,6 +47,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract LectureDao lectureDao();
     public abstract ExamDao examDao();
     public abstract QuestionDao questionDao();
+    public abstract StudentCoursesCrossRef.StudentCoursesCrossRefDao studentCoursesCrossRefDao();
+
 
     public static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NB_OF_THREADS);
@@ -58,7 +60,7 @@ public abstract class AppDatabase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(
                             context.getApplicationContext(),
                             AppDatabase.class,
-                            "a11"
+                            "a13"
                     ).fallbackToDestructiveMigration()
                     .build();
                 }

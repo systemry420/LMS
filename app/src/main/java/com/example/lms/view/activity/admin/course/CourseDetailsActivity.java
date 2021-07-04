@@ -32,7 +32,7 @@ import java.util.List;
 public class CourseDetailsActivity extends AppCompatActivity {
     private static final String TAG = "CourseDetailsActivity";
     private TextInputEditText txtName, txtDescription;
-    private Spinner spinnerGrade, spinnerInstructor;
+    private Spinner spinnerGrade;
     private GradeViewModel gradeViewModel; InstructorViewModel instructorViewModel;
     private List<SpinnerItem> gradesList, instructorList;
     private SpinnerItem selectedGrade, instructorID;
@@ -100,10 +100,6 @@ public class CourseDetailsActivity extends AppCompatActivity {
             txtDescription.setError("Please enter course description");
             return false;
         }
-        if (spinnerInstructor.getSelectedItemId() == 0) {
-            Toast.makeText(this, "Please select an instructor", Toast.LENGTH_LONG).show();
-            return false;
-        }
         if(spinnerGrade.getSelectedItemId() == 0) {
             Toast.makeText(this, "Please select a grade", Toast.LENGTH_LONG).show();
             return false;
@@ -120,7 +116,6 @@ public class CourseDetailsActivity extends AppCompatActivity {
         gradeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         instructorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGrade.setAdapter(gradeAdapter);
-        spinnerInstructor.setAdapter(instructorAdapter);
 
 
         gradeViewModel.getAllGrades().observe(this, new Observer<List<Grade>>() {

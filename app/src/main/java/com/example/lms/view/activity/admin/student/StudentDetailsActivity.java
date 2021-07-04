@@ -75,7 +75,7 @@ public class StudentDetailsActivity extends AppCompatActivity {
         }
     }
 
-    private void saveInstructor() {
+    private void saveStudent() {
         name = txtName.getText().toString();
         address = txtAddress.getText().toString();
         email = txtEmail.getText().toString();
@@ -168,7 +168,7 @@ public class StudentDetailsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.save:
-                saveInstructor();
+                saveStudent();
                 break;
         }
         return super.onOptionsItemSelected(item);

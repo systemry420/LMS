@@ -28,6 +28,8 @@ public abstract class CourseDao {
     @Query("SELECT * FROM courses")
     public abstract LiveData<List<Course>> getAllCourses();
 
+    @Query("SELECT * FROM courses where course_id = :courseID")
+    public abstract LiveData<Course> getCourse(long courseID);
 
     @Query("SELECT * FROM courses where grade_id = :gradeID ")
     public abstract LiveData<List<Course>> getCoursesOfGrade(long gradeID);

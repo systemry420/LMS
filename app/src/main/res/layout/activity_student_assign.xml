@@ -10,11 +10,6 @@
     <Spinner
         style="@style/textInputLayoutStyle"
         android:padding="28dp"
-        android:id="@+id/spinner_assign_student_grade" />
-
-    <Spinner
-        style="@style/textInputLayoutStyle"
-        android:padding="28dp"
         android:id="@+id/spinner_assign_student_course" />
 
     <com.google.android.material.chip.ChipGroup

@@ -1,6 +1,7 @@
 package com.example.lms.view.activity.admin.assign;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -32,7 +33,7 @@ public class StudentAssignActivity extends AppCompatActivity {
     private CourseViewModel courseViewModel;
     private StudentViewModel studentViewModel;
     private List<SpinnerItem> gradesList, coursesList;
-    private SpinnerItem selectedGrade, selectedCourse;
+    private SpinnerItem selectedCourse;
     private Student currentStudent;
 
     @Override
@@ -40,15 +41,10 @@ public class StudentAssignActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_assign);
 
-        spinnerGrade = findViewById(R.id.spinner_assign_student_grade);
         spinnerCourses = findViewById(R.id.spinner_assign_student_course);
 
         gradesList = new ArrayList<>();
         coursesList = new ArrayList<>();
-
-        Intent intent = getIntent();
-        currentStudent = (Student) intent.getSerializableExtra("student");
-        setCoursesSpinner(currentStudent.getGradeID());
 
         chipGroup = findViewById(R.id.chip_courses);
 
@@ -58,6 +54,9 @@ public class StudentAssignActivity extends AppCompatActivity {
 
         courseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);
 
+        Intent intent = getIntent();
+        currentStudent = (Student) intent.getSerializableExtra("student");
+        setCoursesSpinner(currentStudent.getGradeID());
 
     }
 
@@ -70,7 +69,9 @@ public class StudentAssignActivity extends AppCompatActivity {
         courseViewModel.getCoursesOfGrade(gradeID).observe(this, new Observer<List<Course>>() {
             @Override
             public void onChanged(List<Course> courses) {
+                coursesList.add(new SpinnerItem((long) 0, "Please select a course"));
                 for (Course course : courses) {
+                    //todo filter courses of students
                     coursesList.add(new SpinnerItem(course.getCourseID(), course.getName() ));
                 }
                 coursesAdapter.notifyDataSetChanged();
@@ -93,12 +94,18 @@ public class StudentAssignActivity extends AppCompatActivity {
     }
 
     private void assignCourse(SpinnerItem selectedCourse) {
+        if(selectedCourse.getId() == 0) {
+            return;
+        }
+
         Chip chip = new Chip(this);
         chip.setChipBackgroundColorResource(R.color.error);
         chip.setTextColor(getResources().getColor(R.color.white));
         chip.setText(selectedCourse.getCaption());
+        chip.setTextAppearance(R.style.TextAppearance_AppCompat_Large);
         chipGroup.addView(chip);
 
-        //todo assign cross
+        Course course = courseViewModel.getCourse(selectedCourse.getId()).getValue();
+        studentViewModel.insertCourseToStudent(currentStudent, course);
     }
 }
