@@ -9,7 +9,6 @@ import androidx.room.Transaction;
 import androidx.room.Update;
 
 import com.example.lms.model.Course;
-import com.example.lms.model.relations.CourseWithStudents;
 
 import java.util.List;
 
@@ -33,8 +32,4 @@ public abstract class CourseDao {
 
     @Query("SELECT * FROM courses where grade_id = :gradeID ")
     public abstract LiveData<List<Course>> getCoursesOfGrade(long gradeID);
-
-    @Transaction
-    @Query("select * from courses where course_id = :courseID")
-    public abstract LiveData<List<CourseWithStudents>> getCourseWithStudents(long courseID);
 }

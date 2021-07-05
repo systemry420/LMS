@@ -21,10 +21,6 @@ public class StudentAdapter2 extends ListAdapter<Student, StudentAdapter2.Studen
         void onClickStudent(Student student);
     }
 
-    public interface OnDeleteStudent2ClickListener {
-        void onDeleteStudent(Student student);
-    }
-
     public OnStudent2ClickListener listener;
 
     public void setOnStudentClickListener(OnStudent2ClickListener listener) {

@@ -48,7 +48,6 @@ public class AdminAssignStudentActivity extends AppCompatActivity {
 
         studentViewModel = new ViewModelProvider(this).get(StudentViewModel.class);
 
-
         gradesList = new ArrayList<>();
 
         studentsAdapter = new StudentAdapter2();

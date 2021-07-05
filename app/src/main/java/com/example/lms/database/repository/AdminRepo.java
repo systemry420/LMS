@@ -8,13 +8,14 @@ import com.example.lms.database.AppDatabase;
 import com.example.lms.database.dao.CourseDao;
 import com.example.lms.database.dao.GradeDao;
 import com.example.lms.database.dao.InstructorDao;
+import com.example.lms.database.dao.InstructorGradeDao;
 import com.example.lms.database.dao.StudentCourseDao;
 import com.example.lms.database.dao.StudentDao;
 import com.example.lms.model.Course;
 import com.example.lms.model.Grade;
 import com.example.lms.model.Instructor;
 import com.example.lms.model.Student;
-import com.example.lms.model.relations.CourseWithStudents;
+import com.example.lms.model.relations.InstructorGradeCrossRef;
 import com.example.lms.model.relations.StudentCoursesCrossRef;
 
 import java.util.List;
@@ -27,6 +28,7 @@ public class AdminRepo {
     private final CourseDao courseDao;
     private final StudentDao studentDao;
     private final StudentCourseDao studentCourseDao;
+    private final InstructorGradeDao instructorGradeDao;
     private final LiveData<List<Grade>> allGrades;
     private final LiveData<List<Instructor>> allInstructors;
     private final LiveData<List<Course>> allCourses;
@@ -39,6 +41,7 @@ public class AdminRepo {
         courseDao = db.courseDao();
         studentDao = db.studentDao();
         studentCourseDao = db.studentCoursesDao();
+        instructorGradeDao = db.instructorGradeDao();
 
 
         allGrades = gradeDao.getAllGrades();
@@ -49,6 +52,20 @@ public class AdminRepo {
 
     public LiveData<List<Course>> getCoursesOfStudent(long studentID) {
         return studentCourseDao.getCoursesWithStudentId(studentID);
+    }
+
+    public LiveData<List<Grade>> getGradesOfInstructor(long instructorID) {
+        return instructorGradeDao.getGradesWithInstructorId(instructorID);
+    }
+
+    public LiveData<List<Instructor>> getInstructorsOfGrade(long gradeID) {
+        return instructorGradeDao.getInstructorsWithGradeId(gradeID);
+    }
+
+    public void insertInstructorGradeJoin(InstructorGradeCrossRef join) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            instructorGradeDao.insertInstructorGradeJoin(join);
+        });
     }
 
     public LiveData<Course> getCourse(long courseID) {
@@ -77,10 +94,6 @@ public class AdminRepo {
 
     public LiveData<List<Course>> getCoursesOfGrade(long gradeID) {
         return courseDao.getCoursesOfGrade(gradeID);
-    }
-
-    public LiveData<List<CourseWithStudents>> getStudentsOfCourse(long courseID) {
-        return courseDao.getCourseWithStudents(courseID);
     }
 
     public long insertStudent(Student student) {

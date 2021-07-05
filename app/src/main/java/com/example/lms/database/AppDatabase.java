@@ -7,7 +7,9 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
+import com.example.lms.database.dao.InstructorGradeDao;
 import com.example.lms.database.dao.StudentCourseDao;
+import com.example.lms.model.relations.InstructorGradeCrossRef;
 import com.example.lms.model.relations.StudentCoursesCrossRef;
 import com.example.lms.util.DateConverter;
 import com.example.lms.database.dao.CourseDao;
@@ -36,11 +38,13 @@ import java.util.concurrent.Executors;
         Lecture.class,
         Exam.class,
         Question.class,
-        StudentCoursesCrossRef.class}, version = 17, exportSchema = false)
+        StudentCoursesCrossRef.class,
+        InstructorGradeCrossRef.class}, version = 19, exportSchema = false)
 @TypeConverters(DateConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase INSTANCE;
-    private static final int NB_OF_THREADS = 10;
+    private static final int NB_OF_THREADS = 5;
+
     public abstract GradeDao gradeDao();
     public abstract InstructorDao instructorDao();
     public abstract CourseDao courseDao();
@@ -49,7 +53,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract ExamDao examDao();
     public abstract QuestionDao questionDao();
     public abstract StudentCourseDao studentCoursesDao();
-
+    public abstract InstructorGradeDao instructorGradeDao();
 
     public static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NB_OF_THREADS);
@@ -63,7 +67,6 @@ public abstract class AppDatabase extends RoomDatabase {
                             AppDatabase.class,
                             "a13"
                     ).fallbackToDestructiveMigration()
-                    .allowMainThreadQueries()
                     .build();
                 }
             }

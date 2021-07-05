@@ -31,9 +31,6 @@ public class InstructorDetailsActivity extends AppCompatActivity {
     private static final String TAG = "InstructorDetailsActivi";
     private TextInputEditText txtName, txtAddress, txtEmail, txtPassword, txtPhone;
     private InstructorViewModel instructorViewModel;
-    private GradeViewModel gradeViewModel;
-    private List<SpinnerItem> gradesList;
-    private SpinnerItem gradeID;
     private Instructor currentInstructor;
     private String name, address, email, password, phone;
 
@@ -45,7 +42,6 @@ public class InstructorDetailsActivity extends AppCompatActivity {
         initVariables();
 
         instructorViewModel = new ViewModelProvider(this).get(InstructorViewModel.class);
-        gradeViewModel = new ViewModelProvider(this).get(GradeViewModel.class);
 
         checkIntent();
     }
@@ -80,7 +76,7 @@ public class InstructorDetailsActivity extends AppCompatActivity {
                 instructorViewModel.updateInstructor(currentInstructor);
             }
             else {
-                Instructor instructor = new Instructor(gradeID.getId(), name, address, phone, email, password);
+                Instructor instructor = new Instructor(name, address, phone, email, password);
                 long id = instructorViewModel.insertInstructor(instructor);
                 Log.i(TAG, "saveInstructor: " + id + " " + instructor.toString());
                 Toast.makeText(this, "Instructor added successfully!", Toast.LENGTH_LONG).show();
@@ -95,7 +91,6 @@ public class InstructorDetailsActivity extends AppCompatActivity {
         txtEmail = findViewById(R.id.txt_instructor_email);
         txtPassword = findViewById(R.id.txt_instructor_password);
         txtPhone = findViewById(R.id.txt_instructor_phone);
-        gradesList = new ArrayList<>();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

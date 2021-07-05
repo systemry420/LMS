@@ -14,10 +14,6 @@ public class Instructor implements Serializable {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "instructor_id")
     private long instructorID;
-
-    @ColumnInfo(name = "grade_id")
-    private long gradeID;
-
     @ColumnInfo
     private String name;
     @ColumnInfo
@@ -31,8 +27,7 @@ public class Instructor implements Serializable {
     @ColumnInfo(name = "last_login")
     private String lastLogin;
 
-    public Instructor(long gradeID, String name, String address, String phone, String email, String password) {
-        this.gradeID = gradeID;
+    public Instructor(String name, String address, String phone, String email, String password) {
         this.name = name;
         this.address = address;
         this.phone = phone;
@@ -45,7 +40,6 @@ public class Instructor implements Serializable {
     public String toString() {
         return "Instructor{" +
                 "instructorID=" + instructorID +
-                ", gradeID=" + gradeID +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 ", phone='" + phone + '\'' +
@@ -53,14 +47,6 @@ public class Instructor implements Serializable {
                 ", password='" + password + '\'' +
                 ", lastLogin='" + lastLogin + '\'' +
                 '}';
-    }
-
-    public long getGradeID() {
-        return gradeID;
-    }
-
-    public void setGradeID(long gradeID) {
-        this.gradeID = gradeID;
     }
 
     public long getInstructorID() {

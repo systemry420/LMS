@@ -9,7 +9,6 @@ import com.example.lms.database.repository.AdminRepo;
 import com.example.lms.model.Course;
 import com.example.lms.model.Student;
 import com.example.lms.model.relations.StudentCoursesCrossRef;
-import com.example.lms.model.relations.StudentWithCourses;
 
 import java.util.List;
 

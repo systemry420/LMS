@@ -8,8 +8,6 @@ import androidx.lifecycle.LiveData;
 import com.example.lms.database.repository.AdminRepo;
 import com.example.lms.database.repository.InstructorRepo;
 import com.example.lms.model.Course;
-import com.example.lms.model.Grade;
-import com.example.lms.model.relations.CourseWithStudents;
 
 import java.util.List;
 
@@ -37,9 +35,6 @@ public class CourseViewModel extends AndroidViewModel {
         return adminRepo.getCoursesOfGrade(gradeID);
     }
 
-    public LiveData<List<CourseWithStudents>> getStudentsOfCourse(long courseID) {
-        return adminRepo.getStudentsOfCourse(courseID);
-    }
 
     public long insertCourse(Course course) {
         return adminRepo.insertCourse(course);

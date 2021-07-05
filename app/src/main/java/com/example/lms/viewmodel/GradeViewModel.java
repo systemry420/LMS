@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.lms.database.repository.AdminRepo;
 import com.example.lms.model.Grade;
+import com.example.lms.model.Instructor;
 
 import java.util.List;
 
@@ -18,6 +19,10 @@ public class GradeViewModel extends AndroidViewModel {
         super(application);
         adminRepo = new AdminRepo(application);
         allGrades = adminRepo.getAllGrades();
+    }
+
+    public LiveData<List<Instructor>> getInstructorsOfGrade(long gradeID) {
+        return adminRepo.getInstructorsOfGrade(gradeID);
     }
 
     public LiveData<List<Grade>> getAllGrades() {

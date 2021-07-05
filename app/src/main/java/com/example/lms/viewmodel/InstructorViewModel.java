@@ -7,7 +7,9 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.lms.database.repository.AdminRepo;
+import com.example.lms.model.Grade;
 import com.example.lms.model.Instructor;
+import com.example.lms.model.relations.InstructorGradeCrossRef;
 
 import java.util.List;
 
@@ -20,6 +22,14 @@ public class InstructorViewModel extends AndroidViewModel {
         super(application);
         adminRepo = new AdminRepo(application);
         allInstructors = adminRepo.getAllInstructors();
+    }
+
+    public LiveData<List<Grade>> getGradesOfInstructor(long instructorID) {
+        return adminRepo.getGradesOfInstructor(instructorID);
+    }
+
+    public void insertInstructorGradeJoin(InstructorGradeCrossRef join) {
+        adminRepo.insertInstructorGradeJoin(join);
     }
 
     public LiveData<List<Instructor>> getAllInstructors() {
