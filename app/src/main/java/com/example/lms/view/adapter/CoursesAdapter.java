@@ -64,11 +64,10 @@ public class CoursesAdapter extends ListAdapter<Course, CoursesAdapter.CoursesVi
     @Override
     public CoursesViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View itemView = null;
-        if (this.className.equals("CoursesActivity")) {
-            itemView = LayoutInflater.from(parent.getContext()).inflate(
-                    R.layout.list_item, parent, false
-            );
-        }
+        itemView = LayoutInflater.from(parent.getContext()).inflate(
+                R.layout.list_item, parent, false
+        );
+
         return new CoursesViewHolder(itemView);
     }
 

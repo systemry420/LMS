@@ -12,12 +12,12 @@
         android:padding="28dp"
         android:id="@+id/spinner_assign_instructor_grade" />
 
-    <com.google.android.material.chip.ChipGroup
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background2"
-        style="@style/cardStyle"
-        android:padding="32dp"
-        android:id="@+id/chip_grades" />
+        tools:listitem="@layout/list_item"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:id="@+id/assign_instructor_grade_recycler_view" />
 
 </LinearLayout>
