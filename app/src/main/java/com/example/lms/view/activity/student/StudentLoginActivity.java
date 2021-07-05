@@ -5,7 +5,9 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.TextView;
 
@@ -25,17 +27,23 @@ public class StudentLoginActivity extends AppCompatActivity {
     private TextInputEditText txtEmail, txtPassword;
     private StudentViewModel studentViewModel;
     private TextView textViewError;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor sharedEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_login);
 
+
         txtEmail = findViewById(R.id.txt_student_login_email);
         txtPassword = findViewById(R.id.txt_student_login_password);
         textViewError = findViewById(R.id.student_login_textview_error);
 
         studentViewModel = new ViewModelProvider(this).get(StudentViewModel.class);
+
+        sharedPreferences = getSharedPreferences("user_student", MODE_PRIVATE);
+        sharedEditor = sharedPreferences.edit();
     }
 
     public void loginStudent(View view) {
@@ -58,6 +66,7 @@ public class StudentLoginActivity extends AppCompatActivity {
 
                     if (email.equals(txtEmail.getText().toString())
                             && password.equals(txtPassword.getText().toString())) {
+                        sharedEditor.putLong("studentID", student.getStudentID()).commit();
                         startActivity(new Intent(StudentLoginActivity.this,
                                 StudentHomeActivity.class));
                         break;

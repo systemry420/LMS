@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.example.lms.R;
@@ -19,11 +20,15 @@ import java.util.List;
 public class StudentHomeActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private StudentViewModel studentViewModel;
+    private SharedPreferences sharedPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_home);
+
+        sharedPreferences = getSharedPreferences("user_student", MODE_PRIVATE);
 
         recyclerView = findViewById(R.id.student_home_courses_recyclerview);
 
@@ -33,7 +38,8 @@ public class StudentHomeActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        studentViewModel.getCoursesOfStudent(1).observe(this, new Observer<List<Course>>() {
+        studentViewModel.getCoursesOfStudent(sharedPreferences.getLong("studentID", 0))
+                .observe(this, new Observer<List<Course>>() {
             @Override
             public void onChanged(List<Course> courseList) {
                 adapter.submitList(courseList);

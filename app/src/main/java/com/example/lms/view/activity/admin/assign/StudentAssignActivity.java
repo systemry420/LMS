@@ -86,16 +86,17 @@ public class StudentAssignActivity extends AppCompatActivity {
                 studentCourses = studentViewModel.getCoursesOfStudent(currentStudent.getStudentID()).getValue();
 
                 for (Course course : courses) {
-                    Log.i(TAG, "onChanged 222: " +course);
-                    if(studentCourses != null) {
-                        for (Course studentCourse : studentCourses) {
-                            if (course.getCourseID() == studentCourse.getCourseID()) {
-                                continue;
-                            }
-                            coursesList.add(
-                                    new SpinnerItem(course.getCourseID(), course.getName()));
-                        }
-                    }
+                    coursesList.add(
+                            new SpinnerItem(course.getCourseID(), course.getName()));
+
+//                    Log.i(TAG, "onChanged 222: " +course);
+//                    if(studentCourses != null) {
+//                        for (Course studentCourse : studentCourses) {
+//                            if (course.getCourseID() == studentCourse.getCourseID()) {
+//                                continue;
+//                            }
+//                        }
+//                    }
                 }
                 coursesAdapter.notifyDataSetChanged();
             }
