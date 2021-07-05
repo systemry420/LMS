@@ -7,14 +7,16 @@
     tools:context=".view.activity.instructor.lecture.AddLectureActivity">
 
     <Spinner
-        style="@style/textInputLayoutStyle"
-        android:padding="28dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="@dimen/marginRight"
         android:id="@+id/spinner_grade_lecture" />
 
     <Spinner
-        style="@style/textInputLayoutStyle"
-        android:padding="28dp"
-        android:layout_below="@id/spinner_grade_lecture"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/spinner_grade_lecture"
+        android:layout_margin="@dimen/marginRight"
         android:id="@+id/spinner_course_lecture" />
 
 

@@ -1,12 +1,12 @@
 package com.example.lms.view.activity.admin.assign;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,7 +14,6 @@ import android.widget.Spinner;
 
 import com.example.lms.R;
 import com.example.lms.model.Course;
-import com.example.lms.model.Grade;
 import com.example.lms.model.Student;
 import com.example.lms.model.relations.StudentCoursesCrossRef;
 import com.example.lms.util.SpinnerItem;
@@ -28,7 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentAssignActivity extends AppCompatActivity {
-    private Spinner spinnerGrade, spinnerCourses;
+    private static final String TAG = "StudentAssignActivity";
+    private Spinner spinnerCourses;
     private ChipGroup chipGroup;
     private GradeViewModel gradeViewModel;
     private CourseViewModel courseViewModel;
@@ -36,6 +36,7 @@ public class StudentAssignActivity extends AppCompatActivity {
     private List<SpinnerItem> gradesList, coursesList;
     private SpinnerItem selectedCourse;
     private Student currentStudent;
+    private List<Course> studentCourses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,17 @@ public class StudentAssignActivity extends AppCompatActivity {
         currentStudent = (Student) intent.getSerializableExtra("student");
         setCoursesSpinner(currentStudent.getGradeID());
 
+        studentViewModel.getCoursesOfStudent(currentStudent.getStudentID()).observe(this, new Observer<List<Course>>() {
+            @Override
+            public void onChanged(List<Course> courseList) {
+                if(courseList != null) {
+                    for (Course course : courseList) {
+                        Log.i(TAG, "onChanged: " + course);
+                        addChip(course.getName());
+                    }
+                }
+            }
+        });
     }
 
     private void setCoursesSpinner(long gradeID) {
@@ -71,12 +83,19 @@ public class StudentAssignActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<Course> courses) {
                 coursesList.add(new SpinnerItem((long) 0, "Please select a course"));
+                studentCourses = studentViewModel.getCoursesOfStudent(currentStudent.getStudentID()).getValue();
 
-                List<Course> studentCourses = studentViewModel.getCoursesOfStudent(currentStudent.getStudentID()).getValue();
                 for (Course course : courses) {
-                    //todo filter courses of students
-                    if (!studentCourses.contains(course))
-                        coursesList.add(new SpinnerItem(course.getCourseID(), course.getName() ));
+                    Log.i(TAG, "onChanged 222: " +course);
+                    if(studentCourses != null) {
+                        for (Course studentCourse : studentCourses) {
+                            if (course.getCourseID() == studentCourse.getCourseID()) {
+                                continue;
+                            }
+                            coursesList.add(
+                                    new SpinnerItem(course.getCourseID(), course.getName()));
+                        }
+                    }
                 }
                 coursesAdapter.notifyDataSetChanged();
             }
@@ -102,14 +121,18 @@ public class StudentAssignActivity extends AppCompatActivity {
             return;
         }
 
-        Chip chip = new Chip(this);
-        chip.setChipBackgroundColorResource(R.color.error);
-        chip.setTextColor(getResources().getColor(R.color.white));
-        chip.setText(selectedCourse.getCaption());
-        chip.setTextAppearance(R.style.TextAppearance_AppCompat_Large);
-        chipGroup.addView(chip);
+        addChip(selectedCourse.getCaption());
 
         StudentCoursesCrossRef join = new StudentCoursesCrossRef(currentStudent.getStudentID(), selectedCourse.getId());
         studentViewModel.insertCourseToStudent(join);
+    }
+
+    private void addChip(String caption) {
+        Chip chip = new Chip(this);
+        chip.setChipBackgroundColorResource(R.color.error);
+        chip.setTextColor(getResources().getColor(R.color.white));
+        chip.setText(caption);
+        chip.setTextAppearance(R.style.TextAppearance_AppCompat_Large);
+        chipGroup.addView(chip);
     }
 }

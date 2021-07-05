@@ -113,6 +113,8 @@ public class AddLectureActivity extends AppCompatActivity {
         gradeViewModel.getAllGrades().observe(this, new Observer<List<Grade>>() {
             @Override
             public void onChanged(List<Grade> grades) {
+                gradesList.add(new SpinnerItem((long) 0, "Please select a grade"));
+
                 for (Grade grade : grades) {
                     gradesList.add(new SpinnerItem(grade.getGradeID(), grade.getGradeName()));
                 }
@@ -155,7 +157,7 @@ public class AddLectureActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedCourse = (SpinnerItem) parent.getItemAtPosition(position);
 
-                fetchLecturesOfGrade(selectedCourse);
+                fetchLectures(selectedCourse);
             }
 
             @Override
@@ -165,16 +167,24 @@ public class AddLectureActivity extends AppCompatActivity {
         });
     }
 
-    private void fetchLecturesOfGrade(SpinnerItem selectedCourse) {
-        lectureViewModel.getLecturesOfCourse(selectedCourse.getId()).observe(this, new Observer<List<Lecture>>() {
-            @Override
-            public void onChanged(List<Lecture> lectures) {
-                adapter.submitList(lectures);
-            }
-        });
+    private void fetchLectures(SpinnerItem selectedCourse) {
+        if (selectedCourse.getId() == 0) {
+            lectureViewModel.getAllLectures().observe(this, new Observer<List<Lecture>>() {
+                @Override
+                public void onChanged(List<Lecture> lectures) {
+                    adapter.submitList(lectures);
+                }
+            });
+        }
+        else {
+            lectureViewModel.getLecturesOfCourse(selectedCourse.getId()).observe(this, new Observer<List<Lecture>>() {
+                @Override
+                public void onChanged(List<Lecture> lectures) {
+                    adapter.submitList(lectures);
+                }
+            });
+        }
     }
-
-
 
     public void openDetailsActivity(View view) {
         startActivity(new Intent(this, LectureDetailsActivity.class));

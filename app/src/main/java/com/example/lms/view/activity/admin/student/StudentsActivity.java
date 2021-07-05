@@ -54,6 +54,8 @@ public class StudentsActivity extends AppCompatActivity {
 
         setAdapterListeners();
 
+        populateGradeSpinner();
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
