@@ -39,7 +39,6 @@ public class InstructorAssignActivity extends AppCompatActivity {
     private ArrayAdapter<SpinnerItem> gradeAdapter;
     private InstructorViewModel instructorViewModel;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,18 +63,8 @@ public class InstructorAssignActivity extends AppCompatActivity {
                             addChip(grade.getGradeName());
                         }
                     }
-
                 }
             });
-    }
-
-    private void addChip(String gradeName) {
-        Chip chip = new Chip(this);
-        chip.setChipBackgroundColorResource(R.color.error);
-        chip.setTextColor(getResources().getColor(R.color.white));
-        chip.setText(gradeName);
-        chip.setTextAppearance(R.style.TextAppearance_AppCompat_Large);
-        chipGroup.addView(chip);
     }
 
     private void setGradesSpinner() {
@@ -83,7 +72,6 @@ public class InstructorAssignActivity extends AppCompatActivity {
         gradeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, gradesList);
         gradeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGrade.setAdapter(gradeAdapter);
-
 
         gradeViewModel.getAllGrades().observe(this, new Observer<List<Grade>>() {
             @Override
@@ -100,6 +88,7 @@ public class InstructorAssignActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedGrade = (SpinnerItem) parent.getItemAtPosition(position);
+                assignGrade(selectedGrade);
             }
 
             @Override
@@ -116,8 +105,17 @@ public class InstructorAssignActivity extends AppCompatActivity {
         }
 
         addChip(selectedGrade.getCaption());
-
         InstructorGradeCrossRef join = new InstructorGradeCrossRef(currentInstructor.getInstructorID(), selectedGrade.getId());
         instructorViewModel.insertInstructorGradeJoin(join);
+    }
+
+
+    private void addChip(String gradeName) {
+        Chip chip = new Chip(this);
+        chip.setChipBackgroundColorResource(R.color.error);
+        chip.setTextColor(getResources().getColor(R.color.white));
+        chip.setText(gradeName);
+        chip.setTextAppearance(R.style.TextAppearance_AppCompat_Large);
+        chipGroup.addView(chip);
     }
 }

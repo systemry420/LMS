@@ -33,7 +33,6 @@ public class AdminAssignInstructorActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-
         instructorViewModel.getAllInstructors().observe(this, new Observer<List<Instructor>>() {
             @Override
             public void onChanged(List<Instructor> instructors) {

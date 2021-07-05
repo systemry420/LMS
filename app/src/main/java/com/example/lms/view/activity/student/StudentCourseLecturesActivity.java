@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.example.lms.R;
@@ -39,6 +40,23 @@ public class StudentCourseLecturesActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         checkIntent();
+
+        adapter.setOnLectureClickListener(new StudentLecturesAdapter.OnLectureClickListener() {
+            @Override
+            public void onClickLecture(Lecture lecture) {
+                openExternalLink(lecture);
+            }
+        });
+    }
+
+    private void openExternalLink(Lecture lecture) {
+        String lectureLink = lecture.getLectureLink();
+
+        Uri webpage = Uri.parse(lectureLink);
+        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
     private void checkIntent() {
