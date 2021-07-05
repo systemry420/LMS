@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CoursesActivity extends AppCompatActivity {
+    private static final String TAG = "CoursesActivity";
     private RecyclerView recyclerView;
     private CourseViewModel courseViewModel;
     private CoursesAdapter adapter;
@@ -47,7 +48,7 @@ public class CoursesActivity extends AppCompatActivity {
         gradesList = new ArrayList<>();
 
         recyclerView = findViewById(R.id.course_recycler_view);
-        adapter = new CoursesAdapter();
+        adapter = new CoursesAdapter(TAG);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         courseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);

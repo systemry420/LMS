@@ -1,5 +1,7 @@
 package com.example.lms.view.adapter;
 
+import android.app.Application;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lms.R;
 import com.example.lms.model.Course;
+import com.example.lms.view.activity.admin.course.CoursesActivity;
 
 import org.jetbrains.annotations.NotNull;
 
 public class CoursesAdapter extends ListAdapter<Course, CoursesAdapter.CoursesViewHolder> {
+
+    private String className;
+
     public interface OnCourseClickListener {
         void onClickCourse(Course course);
     }
@@ -36,8 +42,9 @@ public class CoursesAdapter extends ListAdapter<Course, CoursesAdapter.CoursesVi
         this.deleteListener = listener;
     }
 
-    public CoursesAdapter() {
+    public CoursesAdapter(String className) {
         super(DIFF_CALLBACK);
+        this.className = className;
     }
 
     public static final DiffUtil.ItemCallback<Course> DIFF_CALLBACK = new DiffUtil.ItemCallback<Course>() {
@@ -56,8 +63,12 @@ public class CoursesAdapter extends ListAdapter<Course, CoursesAdapter.CoursesVi
     @NotNull
     @Override
     public CoursesViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_item, parent, false);
+        View itemView = null;
+        if (this.className.equals("CoursesActivity")) {
+            itemView = LayoutInflater.from(parent.getContext()).inflate(
+                    R.layout.list_item, parent, false
+            );
+        }
         return new CoursesViewHolder(itemView);
     }
 
