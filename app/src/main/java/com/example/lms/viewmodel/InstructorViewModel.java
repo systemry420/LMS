@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.example.lms.database.AppDatabase;
 import com.example.lms.database.repository.AdminRepo;
 import com.example.lms.model.Grade;
 import com.example.lms.model.Instructor;
@@ -30,6 +31,10 @@ public class InstructorViewModel extends AndroidViewModel {
 
     public void insertInstructorGradeJoin(InstructorGradeCrossRef join) {
         adminRepo.insertInstructorGradeJoin(join);
+    }
+
+    public void deleteInstructorGradeJoin(InstructorGradeCrossRef join) {
+        adminRepo.deleteInstructorGradeJoin(join);
     }
 
     public LiveData<List<Instructor>> getAllInstructors() {

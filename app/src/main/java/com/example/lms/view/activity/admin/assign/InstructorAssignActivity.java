@@ -1,11 +1,13 @@
 package com.example.lms.view.activity.admin.assign;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.lms.R;
 import com.example.lms.model.Course;
@@ -41,6 +44,7 @@ public class InstructorAssignActivity extends AppCompatActivity {
     private InstructorViewModel instructorViewModel;
     private GradesAdapter adapter;
     private RecyclerView recyclerView;
+    private AlertDialog.Builder alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,8 @@ public class InstructorAssignActivity extends AppCompatActivity {
 
         spinnerGrade = findViewById(R.id.spinner_assign_instructor_grade);
 
+        alertDialog = new AlertDialog.Builder(this);
+
         Intent intent = getIntent();
         currentInstructor = (Instructor) intent.getSerializableExtra("instructor");
         setGradesSpinner();
@@ -72,6 +78,31 @@ public class InstructorAssignActivity extends AppCompatActivity {
                     }
                 }
             });
+
+        adapter.setOnDeleteListener(new GradesAdapter.OnDeleteGradeClickListener() {
+            @Override
+            public void onDeleteItem(Grade grade) {
+                removeGradeOfInstructor(grade);
+            }
+        });
+    }
+
+    private void removeGradeOfInstructor(Grade grade) {
+        alertDialog
+            .setTitle("Remove grade from instructor")
+            .setMessage("Are you sure you want to remove this grade?")
+            .setCancelable(false)
+            .setPositiveButton("Yes", (dialog, which) -> {
+                InstructorGradeCrossRef join = new InstructorGradeCrossRef(
+                        currentInstructor.getInstructorID(), grade.getGradeID());
+                instructorViewModel.deleteInstructorGradeJoin(join);
+                Toast.makeText(InstructorAssignActivity.this,
+                        "Grade removed from instructor", Toast.LENGTH_LONG).show();
+            })
+            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {}
+            }).show();
     }
 
     private void setGradesSpinner() {

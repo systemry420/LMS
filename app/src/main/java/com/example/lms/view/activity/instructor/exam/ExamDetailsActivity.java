@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.lms.R;
@@ -29,13 +30,17 @@ import com.example.lms.viewmodel.ExamViewModel;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class ExamDetailsActivity extends AppCompatActivity {
 
     private LinearLayout detailsLayout, questionsLayout, qaLayout, mcqLayout;
     private CalendarView calendarView;
+    private TimePicker timePicker;
     private TextInputEditText txtExamTitle, txtExamScore,
             txtExamDuration, txtQaQuestion, txtMcqQuestion,
             txtMcqOption1, txtMcqOption2, txtMcqOption3;
@@ -44,14 +49,18 @@ public class ExamDetailsActivity extends AppCompatActivity {
     private Button btnProceed, btnNextQuestion, btnSubmitExam;
     private Spinner spinnerQuestionType, spinnerCourse;
     private String questionType;
-    private List<Question> questionList = new ArrayList<>();
+    private List<Question> questionList;
     private RecyclerView recyclerView;
     private InstructorQuestionAdapter questionsAdapter;
     private ExamViewModel examViewModel;
     private CourseViewModel courseViewModel;
     private List<SpinnerItem> coursesList = new ArrayList<>();
     private SpinnerItem selectedCourse;
+    private Calendar calendarDate;
     private Long examDate;
+    private Exam exam;
+    private long examID;
+    private int year, month, dayOfMonth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +73,8 @@ public class ExamDetailsActivity extends AppCompatActivity {
 
         setSpinnerListener();
 
+        setTimepickerListener();
+
         questionsAdapter = new InstructorQuestionAdapter();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(questionsAdapter);
@@ -72,16 +83,119 @@ public class ExamDetailsActivity extends AppCompatActivity {
         setCourseSpinner();
 
         setCalendarListener();
+
+        questionsAdapter.setOnDeleteListener(new InstructorQuestionAdapter.OnDeleteQuestionClickListener() {
+            @Override
+            public void onDeleteItem(Question question) {
+                removeQuestion(question);
+            }
+        });
+    }
+
+    private void setTimepickerListener() {
+        timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+            @Override
+            public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
+                examDate = DateConverter
+                        .calendarToLong(year, month, dayOfMonth, hourOfDay, minute);
+            }
+        });
+    }
+
+    private void removeQuestion(Question question) {
+        questionList.remove(question);
+        questionsAdapter.submitList(questionList);
     }
 
     private void setCalendarListener() {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                examDate = DateConverter.calendarToLong(year, month, dayOfMonth);
+                ExamDetailsActivity.this.year = year;
+                ExamDetailsActivity.this.month = month;
+                ExamDetailsActivity.this.dayOfMonth = dayOfMonth;
             }
         });
     }
+
+    private void submitExam() {
+        //todo : save time in database
+
+        examViewModel.insertQuestionsToExam(questionList);
+    }
+
+    private void proceedToQuestions() {
+        if(txtExamTitle.getText().toString().equals("")) {
+            txtExamTitle.setError("Please provide a title for the exam");
+            return;
+        }
+        if(txtExamDuration.getText().toString().equals("")) {
+            txtExamDuration.setError("Please provide a duration for the exam");
+            return;
+        }
+        if(txtExamScore.getText().toString().equals("")) {
+            txtExamScore.setError("Please provide a score for the exam");
+            return;
+        }
+        if(spinnerCourse.getSelectedItemId() == 0) {
+            Toast.makeText(this, "Please select a course", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        examTitle = txtExamTitle.getText().toString();
+        examScore = Integer.parseInt(txtExamScore.getText().toString());
+        examDuration = Integer.parseInt(txtExamDuration.getText().toString());
+
+        txtExamDuration.setText("");
+        txtExamTitle.setText("");
+        txtExamScore.setText("");
+        detailsLayout.setVisibility(View.GONE);
+        questionsLayout.setVisibility(View.VISIBLE);
+
+        Long courseID = selectedCourse.getId();
+        exam = new Exam(courseID, examTitle, examDuration, examDate, examScore);
+
+        examID = examViewModel.insertExam(exam);
+
+    }
+
+    private void nextQuestion() {
+        if (questionType.equals("qa") || questionType.equals("tf")) {
+            String title = txtQaQuestion.getText().toString();
+            Question question = new Question();
+            question.setExamID(examID);
+            question.setTitle(title);
+            question.setType(questionType);
+            questionList.add(question);
+            txtQaQuestion.setText("");
+
+        }
+        else  {
+            String title = txtMcqQuestion.getText().toString();
+            String option1 = txtMcqOption1.getText().toString();
+            String option2 = txtMcqOption2.getText().toString();
+            String option3 = txtMcqOption3.getText().toString();
+
+            Question questionMcq = new Question();
+            questionMcq.setExamID(examID);
+            questionMcq.setType(questionType);
+            questionMcq.setTitle(title);
+            questionMcq.setOption1(option1);
+            questionMcq.setOption2(option2);
+            questionMcq.setOption3(option3);
+
+            questionList.add(questionMcq);
+
+            txtMcqQuestion.setText("");
+            txtMcqOption1.setText("");
+            txtMcqOption2.setText("");
+            txtMcqOption3.setText("");
+        }
+
+        questionsAdapter.submitList(questionList);
+
+    }
+
 
     private void setCourseSpinner() {
         courseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);
@@ -166,84 +280,12 @@ public class ExamDetailsActivity extends AppCompatActivity {
         });
     }
 
-    private void submitExam() {
-        //todo : save time in database
-        Long courseID = selectedCourse.getId();
-        Exam exam = new Exam(courseID, examTitle, examDuration, examDate, examScore);
-
-        long examID = examViewModel.insertExam(exam);
-        examViewModel.insertQuestionsToExam(questionList);
-    }
-
-    private void proceedToQuestions() {
-        if(txtExamTitle.getText().toString().equals("")) {
-            txtExamTitle.setError("Please provide a title for the exam");
-            return;
-        }
-        if(txtExamDuration.getText().toString().equals("")) {
-            txtExamDuration.setError("Please provide a duration for the exam");
-            return;
-        }
-        if(txtExamScore.getText().toString().equals("")) {
-            txtExamScore.setError("Please provide a score for the exam");
-            return;
-        }
-        if(spinnerCourse.getSelectedItemId() == 0) {
-            Toast.makeText(this, "Please select a course", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        examTitle = txtExamTitle.getText().toString();
-        examScore = Integer.parseInt(txtExamScore.getText().toString());
-        examDuration = Integer.parseInt(txtExamDuration.getText().toString());
-        //todo clear input
-        detailsLayout.setVisibility(View.GONE);
-        questionsLayout.setVisibility(View.VISIBLE);
-    }
-
-    private void nextQuestion() {
-        // todo clear input, add q type to each Q, add true/false
-        if (questionType.equals("qa") || questionType.equals("tf")) {
-            String title = txtQaQuestion.getText().toString();
-            Question question = new Question();
-            question.setTitle(title);
-            question.setType(questionType);
-            questionList.add(question);
-            txtQaQuestion.setText("");
-
-        }
-        else  {
-            String title = txtMcqQuestion.getText().toString();
-            String option1 = txtMcqOption1.getText().toString();
-            String option2 = txtMcqOption2.getText().toString();
-            String option3 = txtMcqOption3.getText().toString();
-
-            Question questionMcq = new Question();
-            questionMcq.setType(questionType);
-            questionMcq.setTitle(title);
-            questionMcq.setOption1(option1);
-            questionMcq.setOption2(option2);
-            questionMcq.setOption3(option3);
-
-            questionList.add(questionMcq);
-
-            txtMcqQuestion.setText("");
-            txtMcqOption1.setText("");
-            txtMcqOption2.setText("");
-            txtMcqOption3.setText("");
-        }
-
-        questionsAdapter.submitList(questionList);
-
-    }
-
-
-
-
 
 
 
     private void initMembers() {
+        questionList = new ArrayList<>();
+        timePicker = findViewById(R.id.exam_time_picker);
         detailsLayout = findViewById(R.id.layout_exam_details);
         questionsLayout = findViewById(R.id.layout_exam_questions);
         qaLayout = findViewById(R.id.qa_layout);

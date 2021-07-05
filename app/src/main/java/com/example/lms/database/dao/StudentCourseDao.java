@@ -2,6 +2,7 @@ package com.example.lms.database.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -36,5 +37,8 @@ public abstract class StudentCourseDao {
     @Transaction
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public abstract void insertStudentCoursesJoin(StudentCoursesCrossRef join);
+
+    @Delete
+    public abstract void deleteStudentCoursesJoin(StudentCoursesCrossRef join);
 
 }

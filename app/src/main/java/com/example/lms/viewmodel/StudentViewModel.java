@@ -22,6 +22,10 @@ public class StudentViewModel extends AndroidViewModel {
         allStudents = adminRepo.getAllStudents();
     }
 
+    public void deleteStudentCourseJoin(StudentCoursesCrossRef join) {
+        adminRepo.deleteStudentCourseJoin(join);
+    }
+
     public LiveData<List<Student>> getAllStudents() {
         return allStudents;
     }

@@ -39,7 +39,7 @@ import java.util.concurrent.Executors;
         Exam.class,
         Question.class,
         StudentCoursesCrossRef.class,
-        InstructorGradeCrossRef.class}, version = 19, exportSchema = false)
+        InstructorGradeCrossRef.class}, version = 20, exportSchema = false)
 @TypeConverters(DateConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase INSTANCE;

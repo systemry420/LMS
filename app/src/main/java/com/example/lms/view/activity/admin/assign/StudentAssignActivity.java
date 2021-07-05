@@ -107,13 +107,15 @@ public class StudentAssignActivity extends AppCompatActivity {
     }
 
     private void removeAssignmentOfCourse(Course course) {
+        Toast.makeText(StudentAssignActivity.this, "Course removed from student", Toast.LENGTH_LONG).show();
         alertDialog
             .setTitle("Remove course from student")
             .setMessage("Are you sure you want to remove this course?")
             .setCancelable(false)
             .setPositiveButton("Yes", (dialog, which) -> {
-//                gradeViewModel.deleteGrade(grade);
-                Toast.makeText(StudentAssignActivity.this, "Course removed from student", Toast.LENGTH_LONG).show();
+                studentViewModel.deleteStudentCourseJoin(new StudentCoursesCrossRef(
+                        currentStudent.getStudentID(), course.getCourseID()
+                ));
             })
             .setNegativeButton("No", new DialogInterface.OnClickListener() {
                 @Override

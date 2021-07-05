@@ -58,6 +58,18 @@ public class AdminRepo {
         return instructorGradeDao.getGradesWithInstructorId(instructorID);
     }
 
+    public void deleteInstructorGradeJoin(InstructorGradeCrossRef join) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            instructorGradeDao.deleteInstructorGradeJoin(join);
+        });
+    }
+
+    public void deleteStudentCourseJoin(StudentCoursesCrossRef join) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            studentCourseDao.deleteStudentCoursesJoin(join);
+        });
+    }
+
     public LiveData<List<Instructor>> getInstructorsOfGrade(long gradeID) {
         return instructorGradeDao.getInstructorsWithGradeId(gradeID);
     }

@@ -17,15 +17,26 @@ public class Exam {
     @ColumnInfo
     private Long date;
     @ColumnInfo
+    private Long time;
+    @ColumnInfo
     private int score;
     @ColumnInfo
     private int duration;
+
 
     public Exam(Long courseID, String title, int duration, Long date, int score) {
         this.courseID = courseID;
         this.title = title;
         this.score = score;
         this.date = date;
+    }
+
+    public Long getTime() {
+        return time;
+    }
+
+    public void setTime(Long time) {
+        this.time = time;
     }
 
     public Long getExamID() {

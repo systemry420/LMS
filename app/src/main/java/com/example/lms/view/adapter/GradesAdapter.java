@@ -41,14 +41,13 @@ public class GradesAdapter extends ListAdapter<Grade, GradesAdapter.GradesViewHo
         super(DIFF_CALLBACK);
     }
 
-
     class GradesViewHolder extends RecyclerView.ViewHolder {
         private final TextView textView;
-        private final ImageButton deleteIcon;
+
         public GradesViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.item_title);
-            deleteIcon = itemView.findViewById(R.id.icon_delete_item);
+            ImageButton deleteIcon = itemView.findViewById(R.id.icon_delete_item);
 
             itemView.setOnClickListener(v -> {
                 int position = getAdapterPosition();

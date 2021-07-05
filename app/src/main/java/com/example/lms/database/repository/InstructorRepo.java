@@ -87,7 +87,7 @@ public class InstructorRepo {
 
     public void insertQuestionsToExam(List<Question> questionList) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
-            questionDao.insertQuestions(questionList);
+            examDao.insertQuestions(questionList);
         });
     }
 
