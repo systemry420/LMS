@@ -5,9 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="@dimen/marginTop"
     tools:context=".MainActivity">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/student_portal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -17,9 +18,9 @@
         <TextView
             style="@style/cardTextStyle"
             android:text="Student Portal" />
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/instructor_portal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -29,7 +30,7 @@
         <TextView
             style="@style/cardTextStyle"
             android:text="Instructor Portal" />
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 
 </LinearLayout>

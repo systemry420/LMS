@@ -44,4 +44,7 @@
     <string name="login_as_admin">Login as admin</string>
     <string name="login">Login</string>
     <string name="delete">Delete</string>
+    <string name="admin_portal">Admin Portal</string>
+    <string name="instructor_portal">Instructor Portal</string>
+    <string name="student_portal">Student Portal</string>
 </resources>

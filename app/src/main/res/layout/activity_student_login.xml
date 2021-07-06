@@ -7,9 +7,23 @@
     android:orientation="vertical"
     tools:context=".view.activity.student.StudentLoginActivity">
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/marginRight"
+        android:background="#FFFFFF"
+        android:src="@mipmap/artif_intell"
+        app:shapeAppearanceOverlay="@style/roundedImage" />
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/student_portal"
+        />
 
     <TextView
         android:id="@+id/student_login_textview_error"
@@ -24,7 +38,6 @@
         style="@style/textInputLayoutStyle">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txt_student_login_email"
-            android:background="#fff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -35,7 +48,6 @@
         style="@style/textInputLayoutStyle">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txt_student_login_password"
-            android:background="#fff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>

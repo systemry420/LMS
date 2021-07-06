@@ -7,15 +7,22 @@
     android:orientation="vertical"
     tools:context=".view.activity.admin.AdminLoginActivity">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:src="@drawable/ic_launcher_background"
-        android:layout_height="200dp" />
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/marginRight"
+        android:background="#FFFFFF"
+        android:src="@mipmap/artif_intell"
+        app:shapeAppearanceOverlay="@style/roundedImage" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="admin portal"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/admin_portal"
         />
 
     <com.google.android.material.textfield.TextInputLayout

@@ -62,7 +62,6 @@
                     style="@style/textInputLayoutStyle">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/txt_exam_title"
-                        android:background="#fff"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -75,7 +74,6 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/txt_exam_duration"
                         android:layout_width="match_parent"
-                        android:background="#fff"
                         android:inputType="number"
                         android:layout_height="wrap_content"/>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -87,7 +85,6 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/txt_exam_score"
                         android:inputType="number"
-                        android:background="#fff"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                 </com.google.android.material.textfield.TextInputLayout>
