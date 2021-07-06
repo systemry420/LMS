@@ -19,6 +19,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.lms.R;
+import com.example.lms.model.relations.ExamQuestions;
 import com.example.lms.util.DateConverter;
 import com.example.lms.util.SpinnerItem;
 import com.example.lms.model.Course;
@@ -56,10 +57,8 @@ public class ExamDetailsActivity extends AppCompatActivity {
     private CourseViewModel courseViewModel;
     private List<SpinnerItem> coursesList = new ArrayList<>();
     private SpinnerItem selectedCourse;
-    private Calendar calendarDate;
     private Long examDate;
     private Exam exam;
-    private long examID;
     private int year, month, dayOfMonth;
 
     @Override
@@ -120,8 +119,9 @@ public class ExamDetailsActivity extends AppCompatActivity {
 
     private void submitExam() {
         //todo : save time in database
-
-        examViewModel.insertQuestionsToExam(questionList);
+        examViewModel.insertQuestions(exam, questionList);
+        Toast.makeText(this, "Exam is added", Toast.LENGTH_LONG).show();
+        finish();
     }
 
     private void proceedToQuestions() {
@@ -155,15 +155,12 @@ public class ExamDetailsActivity extends AppCompatActivity {
         Long courseID = selectedCourse.getId();
         exam = new Exam(courseID, examTitle, examDuration, examDate, examScore);
 
-        examID = examViewModel.insertExam(exam);
-
     }
 
     private void nextQuestion() {
         if (questionType.equals("qa") || questionType.equals("tf")) {
             String title = txtQaQuestion.getText().toString();
             Question question = new Question();
-            question.setExamID(examID);
             question.setTitle(title);
             question.setType(questionType);
             questionList.add(question);
@@ -177,7 +174,6 @@ public class ExamDetailsActivity extends AppCompatActivity {
             String option3 = txtMcqOption3.getText().toString();
 
             Question questionMcq = new Question();
-            questionMcq.setExamID(examID);
             questionMcq.setType(questionType);
             questionMcq.setTitle(title);
             questionMcq.setOption1(option1);

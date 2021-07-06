@@ -13,18 +13,25 @@ import android.os.Bundle;
 
 import com.example.lms.R;
 import com.example.lms.model.Course;
+import com.example.lms.model.Exam;
 import com.example.lms.model.Lecture;
 import com.example.lms.model.Student;
+import com.example.lms.view.adapter.StudentHomeCoursesAdapter;
+import com.example.lms.view.adapter.StudentHomeExamAdapter;
 import com.example.lms.view.adapter.StudentLecturesAdapter;
+import com.example.lms.viewmodel.ExamViewModel;
 import com.example.lms.viewmodel.LectureViewModel;
+import com.example.lms.viewmodel.StudentViewModel;
 
 import java.util.List;
 
 public class StudentCourseLecturesActivity extends AppCompatActivity {
-    private RecyclerView recyclerView;
+    private RecyclerView recyclerView, examsRecyclerView;
     private Course currentCourse;
     private LectureViewModel lectureViewModel;
     private StudentLecturesAdapter adapter;
+    private ExamViewModel examViewModel;
+    private StudentHomeExamAdapter examAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +39,11 @@ public class StudentCourseLecturesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_student_course_lectures);
 
         lectureViewModel = new ViewModelProvider(this).get(LectureViewModel.class);
+        examViewModel = new ViewModelProvider(this).get(ExamViewModel.class);
 
-
-
+        examsRecyclerView = findViewById(R.id.student_course_exams_recyclerview);
         recyclerView = findViewById(R.id.student_course_lectures_recyclerview);
+
         adapter = new StudentLecturesAdapter();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
@@ -47,6 +55,21 @@ public class StudentCourseLecturesActivity extends AppCompatActivity {
                 openExternalLink(lecture);
             }
         });
+
+        examAdapter = new StudentHomeExamAdapter();
+        examsRecyclerView.setAdapter(examAdapter);
+        examsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        examAdapter.setOnExamClickListener(new StudentHomeExamAdapter.OnExamClickListener() {
+            @Override
+            public void onClickExam(Exam exam) {
+                Intent intent = new Intent(StudentCourseLecturesActivity.this,
+                        StudentExamActivity.class);
+                intent.putExtra("exam", exam);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void openExternalLink(Lecture lecture) {
@@ -70,6 +93,14 @@ public class StudentCourseLecturesActivity extends AppCompatActivity {
                     adapter.submitList(lectures);
                 }
             });
+
+            examViewModel.getExamsOfCourse(currentCourse.getCourseID())
+                .observe(this, new Observer<List<Exam>>() {
+                    @Override
+                    public void onChanged(List<Exam> exams) {
+                        examAdapter.submitList(exams);
+                    }
+                });
         }
     }
 

@@ -9,6 +9,7 @@ import com.example.lms.database.repository.InstructorRepo;
 import com.example.lms.model.Exam;
 import com.example.lms.model.Lecture;
 import com.example.lms.model.Question;
+import com.example.lms.model.relations.ExamQuestions;
 
 import java.util.List;
 
@@ -23,21 +24,12 @@ public class ExamViewModel extends AndroidViewModel {
         allExams = instructorRepo.getAllExams();
     }
 
-    public LiveData<List<Question>> getQuestionsList(long examID) {
-        questionsList = instructorRepo.getQuestionsOfExam(examID);
-        return questionsList;
+    public LiveData<List<Question>> getQuestionsOfExam(long examID) {
+        return instructorRepo.getQuestionsOfExam(examID);
     }
 
-    public void insertQuestionsToExam(List<Question> questionList) {
-        instructorRepo.insertQuestionsToExam(questionList);
-    }
-
-    public LiveData<List<Exam>> getAllExams() {
-        return allExams;
-    }
-
-    public long insertExam(Exam exam) {
-        return instructorRepo.insertExam(exam);
+    public void insertQuestions(Exam exam, List<Question> questionList) {
+        instructorRepo.insertQuestionsToExam(exam, questionList);
     }
 
     public LiveData<List<Exam>> getExamsOfCourse(long courseID) {

@@ -14,6 +14,7 @@ import com.example.lms.model.Exam;
 import com.example.lms.model.Grade;
 import com.example.lms.model.Lecture;
 import com.example.lms.model.Question;
+import com.example.lms.model.relations.ExamQuestions;
 import com.google.android.material.progressindicator.LinearProgressIndicatorSpec;
 
 import java.util.List;
@@ -42,8 +43,13 @@ public class InstructorRepo {
     }
 
     public LiveData<List<Question>> getQuestionsOfExam(long examID) {
-        questionsOfExam = questionDao.getQuestionsOfExam(examID);
-        return questionsOfExam;
+        return examDao.getQuestionsOfExam(examID);
+    }
+
+    public void insertQuestionsToExam(Exam exam, List<Question> questionList) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            examDao.insertQuestions(exam, questionList);
+        });
     }
 
 
@@ -83,12 +89,6 @@ public class InstructorRepo {
         });
 
         return id.get();
-    }
-
-    public void insertQuestionsToExam(List<Question> questionList) {
-        AppDatabase.databaseWriteExecutor.execute(() -> {
-            examDao.insertQuestions(questionList);
-        });
     }
 
     public void updateLecture(Lecture lecture) {

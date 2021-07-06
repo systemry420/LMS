@@ -23,9 +23,4 @@ public abstract class QuestionDao {
     @Delete
     public abstract void deleteQuestion(Question question);
 
-    @Query("SELECT * FROM questions where exam_id = :examID")
-    public abstract LiveData<List<Question>> getQuestionsOfExam(long examID);
-
-    @Insert
-    public abstract void insertQuestions(List<Question> questions);
 }

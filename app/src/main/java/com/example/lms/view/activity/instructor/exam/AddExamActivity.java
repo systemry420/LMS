@@ -11,29 +11,27 @@ import android.view.View;
 
 import com.example.lms.R;
 import com.example.lms.view.adapter.LecturesAdapter;
+import com.example.lms.viewmodel.ExamViewModel;
 import com.example.lms.viewmodel.LectureViewModel;
 
 public class AddExamActivity extends AppCompatActivity {
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
+    private ExamViewModel examViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_exam);
 
+        examViewModel = new ViewModelProvider(this).get(ExamViewModel.class);
+
         recyclerView = findViewById(R.id.instructor_exam_recycler_view);
 
         LecturesAdapter adapter = new LecturesAdapter();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
-//        lectureViewModel = new ViewModelProvider(this).get(LectureViewModel.class);
-//        lectureViewModel.getAllLectures().observe(this, new Observer<List<Lecture>>() {
-//            @Override
-//            public void onChanged(List<Lecture> lectures) {
-//                adapter.submitList(lectures);
-//            }
-//        });
 
+//        examViewModel.getExamsOfCourse()
     }
 
     public void openDetailsActivity(View view) {

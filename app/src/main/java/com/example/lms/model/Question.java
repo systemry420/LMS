@@ -2,9 +2,17 @@ package com.example.lms.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "questions")
+@Entity(tableName = "questions",
+        foreignKeys = {
+            @ForeignKey(entity = Exam.class,
+                    parentColumns = "exam_id",
+                    childColumns = "exam_id",
+                    onDelete = ForeignKey.CASCADE)
+            }
+        )
 public class Question {
 
     @PrimaryKey(autoGenerate = true)

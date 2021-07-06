@@ -4,8 +4,10 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "exams")
-public class Exam {
+public class Exam implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "exam_id")
@@ -29,6 +31,7 @@ public class Exam {
         this.title = title;
         this.score = score;
         this.date = date;
+        this.duration = duration;
     }
 
     public Long getTime() {

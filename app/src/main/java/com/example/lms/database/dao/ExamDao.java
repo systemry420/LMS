@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Transaction;
 import androidx.room.Update;
@@ -11,17 +12,26 @@ import androidx.room.Update;
 import com.example.lms.model.Exam;
 import com.example.lms.model.Question;
 import com.example.lms.model.relations.ExamQuestions;
+import com.example.lms.model.relations.InstructorGradeCrossRef;
 
 import java.util.List;
 
 @Dao
 public abstract class ExamDao {
-    
     @Insert
     public abstract long insertExam(Exam exam);
 
     @Insert
-    public abstract void insertQuestions(List<Question> questionList);
+    public void insertQuestions(Exam exam, List<Question> questionList) {
+        long id = insertExam(exam);
+        for (Question question : questionList) {
+            question.setExamID(id);
+            insertQuestion(question);
+        }
+    }
+
+    @Insert
+    public abstract long insertQuestion(Question question);
 
     @Update
     public abstract void updateExam(Exam exam);
@@ -36,6 +46,6 @@ public abstract class ExamDao {
     public abstract LiveData<List<Exam>> getExamsOfCourse(long courseID);
 
     @Transaction
-    @Query("SELECT * FROM exams where exam_id = :examID")
-    public abstract LiveData<List<ExamQuestions>> getQuestionsOfExam(long examID);
+    @Query("SELECT * FROM questions where exam_id = :examID")
+    public abstract LiveData<List<Question>> getQuestionsOfExam(long examID);
 }

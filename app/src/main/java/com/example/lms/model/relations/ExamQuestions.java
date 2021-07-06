@@ -18,22 +18,8 @@ public class ExamQuestions {
     )
     public List<Question> examQuestions;
 
-    public ExamQuestions() {
-    }
-
-    public Exam getExam() {
-        return exam;
-    }
-
-    public void setExam(Exam exam) {
+    public ExamQuestions(Exam exam, List<Question> examQuestions) {
         this.exam = exam;
-    }
-
-    public List<Question> getExamQuestions() {
-        return examQuestions;
-    }
-
-    public void setExamQuestions(List<Question> examQuestions) {
         this.examQuestions = examQuestions;
     }
 }
