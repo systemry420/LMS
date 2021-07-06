@@ -1,21 +1,40 @@
 package com.example.lms.view.activity.admin.course;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.lms.MainActivity;
 import com.example.lms.R;
 import com.example.lms.util.SpinnerItem;
 import com.example.lms.model.Course;
@@ -35,9 +54,10 @@ public class CourseDetailsActivity extends AppCompatActivity {
     private Spinner spinnerGrade;
     private GradeViewModel gradeViewModel; InstructorViewModel instructorViewModel;
     private List<SpinnerItem> gradesList, instructorList;
-    private SpinnerItem selectedGrade, instructorID;
+    private SpinnerItem selectedGrade;
     private ArrayAdapter<SpinnerItem> gradeAdapter, instructorAdapter;
     private Course currentCourse;
+    private ImageView imageView;
 
     CourseViewModel courseViewModel;
     @Override
@@ -48,6 +68,8 @@ public class CourseDetailsActivity extends AppCompatActivity {
         txtName = findViewById(R.id.txt_course_name);
         txtDescription = findViewById(R.id.txt_course_desc);
         spinnerGrade = findViewById(R.id.spinner_grade_id);
+        
+        imageView = findViewById(R.id.course_image);
 
         courseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);
         gradeViewModel = new ViewModelProvider(this).get(GradeViewModel.class);

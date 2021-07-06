@@ -15,14 +15,10 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:paddingBottom="100dp"
             android:orientation="vertical">
 
-            <ImageView
-                android:src="@drawable/ic_launcher_background"
-                android:layout_width="match_parent"
-                android:layout_height="200dp" />
             <Spinner
                 style="@style/textInputLayoutStyle"
                 android:layout_height="60dp"

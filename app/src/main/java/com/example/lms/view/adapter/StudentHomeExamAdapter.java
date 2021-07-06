@@ -17,6 +17,7 @@ import com.example.lms.util.DateConverter;
 import org.jetbrains.annotations.NotNull;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class StudentHomeExamAdapter extends ListAdapter<Exam, StudentHomeExamAdapter.HomeExamsViewHolder> {
     public interface OnExamClickListener {
@@ -58,10 +59,12 @@ public class StudentHomeExamAdapter extends ListAdapter<Exam, StudentHomeExamAda
     public void onBindViewHolder(@NonNull @NotNull HomeExamsViewHolder holder, int position) {
         Exam currentExam = getItem(position);
         holder.examTitle.setText(currentExam.getTitle());
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
-//        String date = simpleDateFormat.format(DateConverter.longToCalendar(currentExam.getDate()));
-
-        holder.examDate.setText(currentExam.getDate().toString());
+        if (currentExam.getDate() != null) {
+            Date date=new Date(currentExam.getDate());
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yy HH:mm");
+            String dateText = simpleDateFormat.format(date);
+            holder.examDate.setText(dateText);
+        }
     }
 
     class HomeExamsViewHolder extends RecyclerView.ViewHolder {

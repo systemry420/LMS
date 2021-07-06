@@ -7,14 +7,44 @@
     android:orientation="vertical"
     tools:context=".view.activity.student.StudentCourseLecturesActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/student_course_exams_recyclerview"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:background="@color/background2"
+        android:layout_height="wrap_content">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/student_course_lectures_recyclerview"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_margin="@dimen/marginTop"
+            android:text="Upcoming Exams" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/student_course_exams_recyclerview"
+            android:layout_width="match_parent"
+            android:padding="@dimen/marginTop"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_margin="@dimen/marginTop"
+            android:text="Course Lectures" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/student_course_lectures_recyclerview"
+            android:padding="@dimen/marginTop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
 
 </LinearLayout>
