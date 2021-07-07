@@ -16,7 +16,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="200dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -95,9 +94,11 @@
                     android:text="@string/proceed_to_questions" />
             </LinearLayout>
 
+            <!-- ******* Questions ***********-->
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:visibility="gone"
                 android:id="@+id/layout_exam_questions"
                 android:orientation="vertical">
@@ -142,6 +143,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/mcq_layout"
+                    android:visibility="gone"
                     android:paddingBottom="100dp"
                     android:orientation="vertical">
 
@@ -190,16 +192,12 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="100dp"
                     android:orientation="vertical">
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:layout_below="@id/spinner_course_lecture"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         tools:listitem="@layout/list_item"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp"
                         android:id="@+id/exam_questions_recycler_view" />
 
                 </LinearLayout>

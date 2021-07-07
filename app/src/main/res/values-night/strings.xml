@@ -48,4 +48,5 @@
     <string name="admin_portal">Admin Portal</string>
     <string name="instructor_portal">Instructor Portal</string>
     <string name="student_portal">Student Portal</string>
+    <string name="answer">Answer</string>
 </resources>

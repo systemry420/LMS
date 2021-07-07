@@ -145,6 +145,7 @@ public class AddLectureActivity extends AppCompatActivity {
         courseViewModel.getCoursesOfGrade(gradeID).observe(this, new Observer<List<Course>>() {
             @Override
             public void onChanged(List<Course> courses) {
+                coursesList.add(new SpinnerItem((long) 0, "Please select a course"));
                 for (Course course : courses) {
                     coursesList.add(new SpinnerItem(course.getCourseID(), course.getName() ));
                 }

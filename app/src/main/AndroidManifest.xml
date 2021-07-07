@@ -7,27 +7,40 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/artif_intell_foreground"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/artif_intell_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LMS">
-        <activity android:name=".view.activity.admin.assign.InstructorAssignActivity"></activity>
-        <activity android:name=".view.activity.admin.assign.StudentAssignActivity" />
-        <activity android:name=".view.activity.admin.assign.AdminAssignStudentActivity" />
-        <activity android:name=".view.activity.admin.assign.AdminAssignInstructorActivity" />
-        <activity android:name=".view.activity.admin.assign.AdminAssignActivity" />
-        <activity android:name=".view.activity.admin.AdminLoginActivity" />
-        <activity android:name=".view.activity.instructor.InstructorLoginActivity" />
-        <activity android:name=".view.activity.student.StudentExamActivity" />
-        <activity android:name=".view.activity.student.StudentCourseLecturesActivity" />
+        <activity android:name=".view.activity.admin.assign.InstructorAssignActivity"
+            android:label="Assign Instructor"/>
+        <activity android:name=".view.activity.admin.assign.StudentAssignActivity"
+            android:label="Assign Student"/>
+        <activity android:name=".view.activity.admin.assign.AdminAssignStudentActivity"
+            android:label="Assign Student"/>
+        <activity android:name=".view.activity.admin.assign.AdminAssignInstructorActivity"
+            android:label="Assign Instructor"/>
+        <activity android:name=".view.activity.admin.assign.AdminAssignActivity"
+            android:label="Assignments"/>
+        <activity android:name=".view.activity.admin.AdminLoginActivity"
+            android:label="Admin Portal"/>
+        <activity android:name=".view.activity.instructor.InstructorLoginActivity"
+            android:label="Instructor Portal"/>
+        <activity android:name=".view.activity.student.StudentExamActivity"
+            android:label="Student Exam"/>
+        <activity android:name=".view.activity.student.StudentCourseLecturesActivity"
+            android:label="Lectures"/>
         <activity
             android:name=".view.activity.student.StudentHomeActivity"
             android:label="Student Home" />
-        <activity android:name=".view.activity.student.StudentLoginActivity" />
-        <activity android:name=".view.activity.instructor.evaluation.CorrectExamDetailsActivity" />
-        <activity android:name=".view.activity.instructor.evaluation.CorrectExamActivity" />
-        <activity android:name=".view.activity.instructor.exam.ExamDetailsActivity" />
+        <activity android:name=".view.activity.student.StudentLoginActivity"
+            android:label="Student Portal"/>
+        <activity android:name=".view.activity.instructor.evaluation.CorrectExamDetailsActivity"
+            android:label="Correct Exams"/>
+        <activity android:name=".view.activity.instructor.evaluation.CorrectExamActivity"
+            android:label="Correct Exams"/>
+        <activity android:name=".view.activity.instructor.exam.ExamDetailsActivity"
+            android:label="Exam Details"/>
         <activity
             android:name=".view.activity.instructor.exam.AddExamActivity"
             android:label="Add Exam" />
@@ -40,18 +53,26 @@
         <activity
             android:name=".view.activity.instructor.InstructorHomeActivity"
             android:label="Instructor Home" />
-        <activity android:name=".view.activity.admin.student.StudentDetailsActivity" />
-        <activity android:name=".view.activity.admin.student.StudentsActivity" />
-        <activity android:name=".view.activity.admin.course.CourseDetailsActivity" />
-        <activity android:name=".view.activity.admin.course.CoursesActivity" />
-        <activity android:name=".view.activity.admin.instructor.InstructorDetailsActivity" />
-        <activity android:name=".view.activity.admin.instructor.InstructorActivity" />
+        <activity android:name=".view.activity.admin.student.StudentDetailsActivity"
+            android:label="Student Details"/>
+        <activity android:name=".view.activity.admin.student.StudentsActivity"
+            android:label="Students"/>
+        <activity android:name=".view.activity.admin.course.CourseDetailsActivity"
+            android:label="Course Details"/>
+        <activity android:name=".view.activity.admin.course.CoursesActivity"
+            android:label="Courses"/>
+        <activity android:name=".view.activity.admin.instructor.InstructorDetailsActivity"
+            android:label="Instructor Details"/>
+        <activity android:name=".view.activity.admin.instructor.InstructorActivity"
+            android:label="Instructors"/>
         <activity
             android:name=".view.activity.admin.AdminHomeActivity"
             android:label="Admin Home" />
-        <activity android:name=".view.activity.admin.grade.GradesDetailsActivity" />
-        <activity android:name=".view.activity.admin.grade.GradesActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".view.activity.admin.grade.GradesDetailsActivity"
+            android:label="Grade Details"/>
+        <activity android:name=".view.activity.admin.grade.GradesActivity"
+            android:label="Grades"/>
+        <activity android:name=".MainActivity" android:label="LMS">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

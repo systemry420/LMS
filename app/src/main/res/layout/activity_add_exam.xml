@@ -8,18 +8,16 @@
 
     <Spinner
         style="@style/textInputLayoutStyle"
-        android:padding="28dp"
-        android:id="@+id/spinner_grade_exam" />
+        android:id="@+id/spinner_grade_add_exam" />
 
     <Spinner
         style="@style/textInputLayoutStyle"
-        android:padding="28dp"
-        android:layout_below="@id/spinner_grade_exam"
-        android:id="@+id/spinner_course_exam" />
+        android:layout_below="@id/spinner_grade_add_exam"
+        android:id="@+id/spinner_course_add_exam" />
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_below="@id/spinner_course_exam"
+        android:layout_below="@id/spinner_course_add_exam"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/list_item"

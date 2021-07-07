@@ -89,4 +89,17 @@ public class Exam implements Serializable {
     public void setDuration(int duration) {
         this.duration = duration;
     }
+
+    @Override
+    public String toString() {
+        return "Exam{" +
+                "examID=" + examID +
+                ", courseID=" + courseID +
+                ", title='" + title + '\'' +
+                ", date=" + date +
+                ", time=" + time +
+                ", score=" + score +
+                ", duration=" + duration +
+                '}';
+    }
 }

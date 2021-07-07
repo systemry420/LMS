@@ -22,11 +22,9 @@ public class AdminLoginActivity extends AppCompatActivity {
     }
 
     public void loginAdmin(View view) {
-        startActivity(new Intent(this, AdminHomeActivity.class));
         if (txtEmail.getText().toString().equals("admin")
             && txtPassword.getText().toString().equals("admin")) {
-
+            startActivity(new Intent(this, AdminHomeActivity.class));
         }
-
     }
 }

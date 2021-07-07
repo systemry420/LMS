@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+    <include
+        layout="@layout/question_answer"
+        android:visibility="gone"
+        android:id="@+id/question_answer_view" />
+
+    <include
+        layout="@layout/question_mcq"
+        android:visibility="gone"
+        android:id="@+id/mcq_view" />
+
+    <include
+        android:id="@+id/true_false_view"
+        android:visibility="gone"
+        layout="@layout/question_true_false" />
+
+</LinearLayout>
